@@ -1,0 +1,1 @@
+import getItemsData from "./api";

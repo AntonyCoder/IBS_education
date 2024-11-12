@@ -111,9 +111,10 @@
 }
 
 .item-title {
-    line-height: 40px;
-    margin-top: 8px;
-    font-size: 18px;
+    text-align: center;
+    line-height: 25px;
+    margin: 8px 0;
+    font-size: 16px;
     color: #323232;
 }
 
