@@ -17,6 +17,10 @@
     margin: 0 8.5px 16px;
 }
 
+.item-title {
+    font-size: 13px;
+}
+
 /* Страница товара */
 
 .item-page {
