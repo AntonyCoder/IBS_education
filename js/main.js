@@ -1,23 +1,23 @@
 'use strict'
 
-import getItemsData from "./api.js";
-import { getPictureMin } from "./api.js";
+import fetchCatalogListData from "./api.js";
+import { fetchPictureMin } from "./api.js";
 
 //Получение массива данных
-async function getData() {
+async function getCatalogListData() {
     try {
-        const responseData = await getItemsData();
-        renderItems(responseData);
+        const responseData = await fetchCatalogListData();
+        renderCatalogList(responseData);
     } catch (e) {
         console.error("Ошибка:", e);
     }
 }
 
-export async function renderItems(items) {
+export async function renderCatalogList(items) {
     const catalogItems = document.querySelector('.catalog-items');
 
     //Получение пути для изображения
-    const picturePath = await getPictureMin('80f09214-ea18-46bf-9cbd-22d7493060d9');
+    const picturePath = await fetchPictureMin('80f09214-ea18-46bf-9cbd-22d7493060d9');
 
     catalogItems.innerHTML = '';
 
@@ -54,4 +54,4 @@ export async function renderItems(items) {
     })
 }
 
-getData();
+getCatalogListData();

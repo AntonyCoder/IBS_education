@@ -1,12 +1,12 @@
 'use strict'
 
-import { getItem } from "./api.js";
-import { getPictureFull } from "./api.js";
+import { fetchProductData } from "./api.js";
+import { fetchPictureFull } from "./api.js";
 
 //Получение массива данных
-async function getItemData() {
+async function getProductData() {
     try {
-        const responseData = await getItem('571fc60d-ea2c-469e-a5b6-c229d31f195d');
+        const responseData = await fetchProductData('571fc60d-ea2c-469e-a5b6-c229d31f195d');
         renderProduct(responseData.content);
     } catch (e) {
         console.error('Ошибка:', e);
@@ -16,7 +16,7 @@ async function getItemData() {
 async function renderProduct(item) {
     const itemPage = document.querySelector('.item-page');
 
-    const picturePath = await getPictureFull('06c4a148-7892-435e-a168-56c86b0940a0');
+    const picturePath = await fetchPictureFull('06c4a148-7892-435e-a168-56c86b0940a0');
 
     itemPage.innerHTML = `
     <div class="image-wrapper">
@@ -64,4 +64,4 @@ async function renderProduct(item) {
     `
 }
 
-getItemData();
+getProductData();

@@ -2,7 +2,7 @@
 
 //Запрос на получение списка товаров
 
-export default async function getItemsData() {
+export default async function fetchCatalogListData() {
     try {
         const response = await fetch('http://localhost:3006/item/');
         if (!response.ok) {
@@ -17,7 +17,7 @@ export default async function getItemsData() {
 
 //Запрос на получение одного товара
 
-export async function getItem(itemId) {
+export async function fetchProductData(itemId) {
     try {
         const response = await fetch(`http://localhost:3006/item/${itemId}`);
         if (!response.ok) {
@@ -33,7 +33,7 @@ export async function getItem(itemId) {
 
 //Запрос на получение маленького изображения товара 
 
-export async function getPictureMin(pictureId) {
+export async function fetchPictureMin(pictureId) {
     try {
         const response = await fetch(`http://localhost:3006/picture/min/${pictureId}`);
         if (!response.ok) {
@@ -50,7 +50,7 @@ export async function getPictureMin(pictureId) {
 
 //Запрос на получение большого изображения товара 
 
-export async function getPictureFull(pictureId) {
+export async function fetchPictureFull(pictureId) {
     try {
         const response = await fetch(`http://localhost:3006/picture/full/${pictureId}`);
         if (!response.ok) {

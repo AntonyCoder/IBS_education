@@ -1,18 +1,18 @@
 'use strict'
-import getItemsData from "./api.js"
-import { renderItems } from "./main.js";
+import fetchCatalogListData from "./api.js"
+import { renderCatalogList } from "./main.js";
 
-async function initSearch() {
-    const items = await getItemsData();
+async function initSearchCatalog() {
+    const catalogList = await fetchCatalogListData();
     const searchInput = document.querySelector('.search-field');
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase();
-        const filteredItems = items.filter(item => {
+        const filteredCatalogList = catalogList.filter(item => {
             return item.name.toLowerCase().includes(query);
         });
-        renderItems(filteredItems);
+        renderCatalogList(filteredCatalogList);
     });
 }
 
-initSearch();
+initSearchCatalog();
