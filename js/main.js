@@ -1,7 +1,6 @@
 'use strict'
 
-import fetchCatalogListData from "./api.js";
-import { fetchPictureMin } from "./api.js";
+import fetchCatalogListData, { localhost } from "./api.js";
 
 //Получение массива данных
 async function getCatalogListData() {
@@ -13,45 +12,62 @@ async function getCatalogListData() {
     }
 }
 
-export async function renderCatalogList(items) {
+export function renderCatalogList(items) {
     const catalogItems = document.querySelector('.catalog-items');
 
-    //Получение пути для изображения
-    const picturePath = await fetchPictureMin('80f09214-ea18-46bf-9cbd-22d7493060d9');
+    if (!catalogItems) {
+        throw new Error("Элемент с классом 'catalog-items' не найден.");
+    }
 
     catalogItems.innerHTML = '';
+
+    const fragmentCatalogList = document.createDocumentFragment();
 
     items.forEach(item => {
         //Создаем элемент карточки товара
         const productItem = document.createElement('div');
-        productItem.classList.add('item');
+        productItem.className = 'item';
+
+        //Создаем элемент ссылки товара
+        const productLink = document.createElement('a');
+        productLink.href = `/item.html?id=${item.id}`;
+        productLink.className = 'item-link';
 
         //Создаем элемент кнопки добавления в избранное
-        productItem.innerHTML = `<img src="${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}" 
-        alt="favorite" class="item__favorite-icon">`
+        const favoriteIcon = document.createElement('img');
+        favoriteIcon.className = 'item__favorite-icon'
+        favoriteIcon.alt = 'favorite';
+        favoriteIcon.src = `${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}`;
 
         //Создаем элемент изображения
         const productImage = document.createElement('img');
-        productImage.src = picturePath;
+        productImage.src = `${localhost}${item.picture.path}`;
         productImage.alt = item.picture.alt;
-        productImage.classList.add('item-image');
+        productImage.className = 'item-image'
 
         //Создаем элемент названия товара
         const productTitle = document.createElement('span');
-        productTitle.classList.add('item-title');
+        productTitle.className = 'item-title';
         productTitle.textContent = item.name;
 
         //Создаем элемент цены товара
         const productPrice = document.createElement('span');
-        productPrice.classList.add('item-price');
+        productPrice.className = 'item-price';
         productPrice.textContent = `${item.price.value} ${item.price.currency}`;
 
-        productItem.appendChild(productImage);
-        productItem.appendChild(productTitle);
-        productItem.appendChild(productPrice);
+        productItem.appendChild(productLink);
 
-        catalogItems.appendChild(productItem);
+        productLink.appendChild(favoriteIcon);
+        productLink.appendChild(productImage);
+        productLink.appendChild(productTitle);
+        productLink.appendChild(productPrice);
+
+
+        fragmentCatalogList.appendChild(productItem);
     })
+
+    catalogItems.appendChild(fragmentCatalogList);
+
 }
 
 getCatalogListData();

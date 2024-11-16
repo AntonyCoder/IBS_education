@@ -1,10 +1,11 @@
 'use strict'
 
-//Запрос на получение списка товаров
+export const localhost = 'http://localhost:3006/';
 
+//Запрос на получение списка товаров
 export default async function fetchCatalogListData() {
     try {
-        const response = await fetch('http://localhost:3006/item/');
+        const response = await fetch(`${localhost}item/`);
         if (!response.ok) {
             throw new Error(`Ошибка HTTP: ${response.status}`);
         }
@@ -16,10 +17,9 @@ export default async function fetchCatalogListData() {
 }
 
 //Запрос на получение одного товара
-
 export async function fetchProductData(itemId) {
     try {
-        const response = await fetch(`http://localhost:3006/item/${itemId}`);
+        const response = await fetch(`${localhost}item/${itemId}`);
         if (!response.ok) {
             throw new Error(`Ошибка HTTP: ${response.status}`);
         }
@@ -29,39 +29,3 @@ export async function fetchProductData(itemId) {
         console.error('Ошибка:', e);
     }
 }
-
-
-//Запрос на получение маленького изображения товара 
-
-export async function fetchPictureMin(pictureId) {
-    try {
-        const response = await fetch(`http://localhost:3006/picture/min/${pictureId}`);
-        if (!response.ok) {
-            throw new Error(`Ошибка HTTP: ${response.status}`);
-        }
-        const imageBlob = await response.blob();
-        const imageUrl = URL.createObjectURL(imageBlob);
-
-        return imageUrl;
-    } catch (e) {
-        console.error('Ошибка:', e);
-    }
-}
-
-//Запрос на получение большого изображения товара 
-
-export async function fetchPictureFull(pictureId) {
-    try {
-        const response = await fetch(`http://localhost:3006/picture/full/${pictureId}`);
-        if (!response.ok) {
-            throw new Error(`Ошибка HTTP: ${response.status}`);
-        }
-        const imageBlob = await response.blob();
-        const imageUrl = URL.createObjectURL(imageBlob);
-
-        return imageUrl;
-    } catch (e) {
-        console.error('Ошибка:', e);
-    }
-}
-

@@ -1,37 +1,79 @@
 'use strict'
 
-import { fetchProductData } from "./api.js";
-import { fetchPictureFull } from "./api.js";
+import { fetchProductData, localhost } from "./api.js";
 
 //Получение массива данных
 async function getProductData() {
     try {
-        const responseData = await fetchProductData('571fc60d-ea2c-469e-a5b6-c229d31f195d');
+        const currentUrl = window.location;
+        const productId = new URL(currentUrl).searchParams.get('id');
+        const responseData = await fetchProductData(productId);
         renderProduct(responseData.content);
     } catch (e) {
         console.error('Ошибка:', e);
     }
 }
 
-async function renderProduct(item) {
+function renderProduct(item) {
     const itemPage = document.querySelector('.item-page');
 
-    const picturePath = await fetchPictureFull('06c4a148-7892-435e-a168-56c86b0940a0');
+    if (!itemPage) {
+        throw new Error("Элемент с классом 'item-page' не найден.");
+    }
 
-    itemPage.innerHTML = `
-    <div class="image-wrapper">
-            <img src="${picturePath}" alt="${item.picture.alt}" class="item__image-main">
-        </div>
-        <div class="item-information">
-            <h1 class="item__title-main">${item.name}</h1>
-            <p class="item-description">${item.info}</p>
-            <span class="item-details">Details</span>
-            <p class="item-description">${item.details}</p>
-            <div class="purchase-wrapper">
-                <span class="item__price-main">${item.price.value} ${item.price.currency}</span>
-                <div class="quantity-wrapper">
-                    <button class="control btn-minus ">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    // Создаем контейнер для изображения
+    const imageWrapper = document.createElement('div');
+    imageWrapper.className = 'image-wrapper'
+
+    // Создаем элемент изображения
+    const itemImage = document.createElement('img');
+    itemImage.className = 'item__image-main';
+    itemImage.src = `${localhost}${item.picture.path}`;
+    itemImage.alt = item.picture.alt;
+
+    imageWrapper.appendChild(itemImage);
+
+    // Создаем контейнер для основной информации товара
+    const itemInformation = document.createElement('div');
+    itemInformation.className = 'item-information'
+
+    // Создаем элемент названия товара
+    const itemTitle = document.createElement('h1');
+    itemTitle.className = 'item__title-main'
+    itemTitle.textContent = item.name;
+
+    // Создаем элемент описания товара
+    const itemDescription = document.createElement('p');
+    itemDescription.className = 'item-description'
+    itemDescription.textContent = item.info;
+
+    //Создаем элемент подзаголовка товара
+    const itemDetails = document.createElement('span');
+    itemDetails.className = 'item-details'
+    itemDetails.textContent = 'Details';
+
+    // Создаем элемент деталей товара
+    const itemDescriptionDetails = document.createElement('p');
+    itemDescriptionDetails.className = 'item-description';
+    itemDescriptionDetails.textContent = item.details;
+
+    // Создаем контейнер для блока покупки
+    const purchaseWrapper = document.createElement('div');
+    purchaseWrapper.className = 'purchase-wrapper';
+
+    // Создаем элемент стоимости товара
+    const itemPrice = document.createElement('span');
+    itemPrice.className = 'item__price-main';
+    itemPrice.textContent = `${item.price.value} ${item.price.currency}`;
+
+    // Создаем контейнер для изменения количества товара для покупки
+    const quantityWrapper = document.createElement('div');
+    quantityWrapper.className = 'quantity-wrapper';
+
+    // Создаем кнопку уменьшения количества товара
+    const btnMinus = document.createElement('button');
+    btnMinus.className = 'control';
+    btnMinus.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3333_145)">
                                 <path d="M19 13H5V11H19V13Z" fill="#E97F03" />
                             </g>
@@ -40,11 +82,18 @@ async function renderProduct(item) {
                                     <rect width="24" height="24" fill="white" />
                                 </clipPath>
                             </defs>
-                        </svg>
-                    </button>
-                    <input type="text" class="quantity" value="1">
-                    <button class="control btn-plus ">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        </svg>`
+
+    // Создаем поле изменения количества товара
+    const quantityInput = document.createElement('input');
+    quantityInput.className = 'quantity';
+    quantityInput.value = '1';
+    quantityInput.type = 'text';
+
+    // Создаем кнопку увеличения количества товара
+    const btnPlus = document.createElement('button');
+    btnPlus.className = 'control';
+    btnPlus.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3333_142)">
                                 <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#E97F03" />
                             </g>
@@ -53,15 +102,37 @@ async function renderProduct(item) {
                                     <rect width="24" height="24" fill="white" />
                                 </clipPath>
                             </defs>
-                        </svg>
-                    </button>
-                </div>
-                <button class="add-btn">Add to cart</button>
-                <img src="${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}" 
-                alt="favorite" class="favorite__icon-main">
-            </div>
-        </div>
-    `
+                        </svg>`
+
+    //Добавляем кнопки и поле в обертку
+    quantityWrapper.appendChild(btnMinus);
+    quantityWrapper.appendChild(quantityInput);
+    quantityWrapper.appendChild(btnPlus);
+
+    // Создаем кнопку добавления товара в корзину
+    const addToCartBtn = document.createElement('button');
+    addToCartBtn.className = 'add-btn';
+    addToCartBtn.textContent = 'Add to cart';
+
+    // Иконка избранного
+    const favoriteIcon = document.createElement('img');
+    favoriteIcon.className = 'favorite__icon-main';
+    favoriteIcon.alt = 'favorite';
+    favoriteIcon.src = `${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}`;
+
+    purchaseWrapper.appendChild(itemPrice);
+    purchaseWrapper.appendChild(quantityWrapper);
+    purchaseWrapper.appendChild(addToCartBtn);
+    purchaseWrapper.appendChild(favoriteIcon);
+
+    itemInformation.appendChild(itemTitle);
+    itemInformation.appendChild(itemDescription);
+    itemInformation.appendChild(itemDetails);
+    itemInformation.appendChild(itemDescriptionDetails);
+    itemInformation.appendChild(purchaseWrapper);
+
+    itemPage.appendChild(imageWrapper);
+    itemPage.appendChild(itemInformation);
 }
 
 getProductData();
