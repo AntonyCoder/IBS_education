@@ -118,7 +118,7 @@ function renderProduct(item) {
     const favoriteIcon = document.createElement('img');
     favoriteIcon.className = 'favorite__icon-main';
     favoriteIcon.alt = 'favorite';
-    favoriteIcon.src = `${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}`;
+    favoriteIcon.src = `${item.like ? '/src/assets/svg/favorite_active.svg' : '/src/assets/svg/favorite.svg'}`;
 
     purchaseWrapper.appendChild(itemPrice);
     purchaseWrapper.appendChild(quantityWrapper);
