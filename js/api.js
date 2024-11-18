@@ -1,11 +1,10 @@
 'use strict'
-
-export const localhost = 'http://localhost:3006/';
+import { LOCAL_SERVER_URL } from "./apiConfig.js";
 
 //Запрос на получение списка товаров
 export default async function fetchCatalogListData() {
     try {
-        const response = await fetch(`${localhost}item/`);
+        const response = await fetch(`${LOCAL_SERVER_URL}item/`);
         if (!response.ok) {
             throw new Error(`Ошибка HTTP: ${response.status}`);
         }
@@ -19,7 +18,7 @@ export default async function fetchCatalogListData() {
 //Запрос на получение одного товара
 export async function fetchProductData(itemId) {
     try {
-        const response = await fetch(`${localhost}item/${itemId}`);
+        const response = await fetch(`${LOCAL_SERVER_URL}item/${itemId}`);
         if (!response.ok) {
             throw new Error(`Ошибка HTTP: ${response.status}`);
         }

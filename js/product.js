@@ -1,12 +1,12 @@
 'use strict'
 
-import { fetchProductData, localhost } from "./api.js";
+import { fetchProductData } from "./api.js";
+import { LOCAL_SERVER_URL } from "./apiConfig.js";
 
 //Получение массива данных
 async function getProductData() {
     try {
-        const currentUrl = window.location;
-        const productId = new URL(currentUrl).searchParams.get('id');
+        const productId = new URLSearchParams(window.location).get('id');
         const responseData = await fetchProductData(productId);
         renderProduct(responseData.content);
     } catch (e) {
@@ -28,7 +28,7 @@ function renderProduct(item) {
     // Создаем элемент изображения
     const itemImage = document.createElement('img');
     itemImage.className = 'item__image-main';
-    itemImage.src = `${localhost}${item.picture.path}`;
+    itemImage.src = `${LOCAL_SERVER_URL}${item.picture.path}`;
     itemImage.alt = item.picture.alt;
 
     imageWrapper.appendChild(itemImage);

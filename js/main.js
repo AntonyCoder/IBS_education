@@ -1,6 +1,7 @@
 'use strict'
 
-import fetchCatalogListData, { localhost } from "./api.js";
+import fetchCatalogListData from "./api.js";
+import { LOCAL_SERVER_URL } from "./apiConfig.js";
 
 //Получение массива данных
 async function getCatalogListData() {
@@ -41,7 +42,7 @@ export function renderCatalogList(items) {
 
         //Создаем элемент изображения
         const productImage = document.createElement('img');
-        productImage.src = `${localhost}${item.picture.path}`;
+        productImage.src = `${LOCAL_SERVER_URL}${item.picture.path}`;
         productImage.alt = item.picture.alt;
         productImage.className = 'item-image'
 
