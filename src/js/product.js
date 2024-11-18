@@ -2,6 +2,8 @@
 
 import { fetchProductData } from "./api.js";
 import { LOCAL_SERVER_URL } from "./apiConfig.js";
+import favoriteActiveIcon from '../assets/svg/favorite_active.svg';
+import favoriteDisabledIcon from '../assets/svg/favorite.svg';
 
 //Получение массива данных
 async function getProductData() {
@@ -118,7 +120,7 @@ function renderProduct(item) {
     const favoriteIcon = document.createElement('img');
     favoriteIcon.className = 'favorite__icon-main';
     favoriteIcon.alt = 'favorite';
-    favoriteIcon.src = `${item.like ? '/src/assets/svg/favorite_active.svg' : '/src/assets/svg/favorite.svg'}`;
+    favoriteIcon.src = `${item.like ? favoriteActiveIcon : favoriteDisabledIcon}`;
 
     purchaseWrapper.appendChild(itemPrice);
     purchaseWrapper.appendChild(quantityWrapper);

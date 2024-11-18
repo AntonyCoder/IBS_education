@@ -1,6 +1,7 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MimiCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
@@ -12,24 +13,29 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/, // Подключение CSS
-                use: ['style-loader', 'css-loader'],
+                test: /\.css$/,
+                use: [MimiCssExtractPlugin.loader, 'css-loader'],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i, // Обработка изображений
-                type: 'asset/resource',
-            },
-            {
-                test: /\.html$/, // Подключение HTML файлов
+                test: /\.html$/,
                 use: ['html-loader'],
             },
-        ]
+            {
+                test: /\.(png|jpg|jpeg|svg|gif)$/i,
+                type: 'asset/inline',
+            },
+        ],
     },
     plugins: [
-        new CleanWebpackPlugin(), // Очистка dist при каждой сборке
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-          template: './src/pages/index.html', // Основной HTML
-          filename: 'index.html',
+            template: './src/pages/index.html',
+            filename: 'index.html',
         }),
-      ],
+        new HtmlWebpackPlugin({
+            template: './src/pages/item.html',
+            filename: 'item.html',
+        }),
+        new MimiCssExtractPlugin(),
+    ],
 }
