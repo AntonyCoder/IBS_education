@@ -5,21 +5,25 @@
   "main": "./src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production",
-    "webpack": "webpack --mode development",
-    "start": "webpack server --mode development --open"
+    "build": "cross-env NODE_ENV=prod webpack --mode=production",
+    "webpack": "cross-env NODE_ENV=dev webpack --mode=development",
+    "start": "cross-env NODE_ENV=dev webpack server --mode development --open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
+    "dotenv": "^16.4.5",
     "file-loader": "^6.2.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"

@@ -1,20 +1,43 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MimiCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
+const dotenv = require('dotenv').config({
+    path: path.join(__dirname, '.env')
+})
+
+const isDev = process.env.NODE_ENV === 'dev'
+
+const optimization = () => {
+    const config = {
+        splitChunks: {
+            chunks: 'all'
+        }
+    }
+    if (!isDev) {
+        config.minimizer = [
+            new CssMinimizerWebpackPlugin(),
+            new TerserWebpackPlugin()
+        ]
+    }
+    return config
+}
 
 module.exports = {
     entry: './src/js/index.js',
     output: {
-        filename: 'bundle.js',
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [MimiCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
                 test: /\.html$/,
@@ -26,6 +49,7 @@ module.exports = {
             },
         ],
     },
+    optimization: optimization(),
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -36,6 +60,9 @@ module.exports = {
             template: './src/pages/item.html',
             filename: 'item.html',
         }),
-        new MimiCssExtractPlugin(),
+        new MiniCssExtractPlugin(),
+        new webpack.DefinePlugin({
+            "process.env": dotenv.parsed
+        }),
     ],
 }
