@@ -1,6 +1,6 @@
 'use strict'
 
-export default function setDebounceToInput (callback, delay){
+export default function setDebounce (callback, delay){
     let timeout;
     return function(...args) {
         clearTimeout(timeout);

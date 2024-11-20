@@ -1,13 +1,13 @@
 'use strict'
 import fetchCatalogListData from "./api.js"
 import { renderCatalogList } from "./main.js";
-import setDebounceToInput from "./debounce.js";
+import setDebounce from "./debounce.js";
 
 async function initSearchCatalog() {
     const catalogList = await fetchCatalogListData();
     const searchInput = document.querySelector('.search-field');
 
-    const debouncedRender = setDebounceToInput((query) => {
+    const debouncedRender = setDebounce((query) => {
         const filteredCatalogList = catalogList.filter(item => {
             return item.name.toLowerCase().includes(query);
         });
