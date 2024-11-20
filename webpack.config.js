@@ -1,14 +1,11 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
-const dotenv = require('dotenv').config({
-    path: path.join(__dirname, '.env')
-})
 
 const isDev = process.env.NODE_ENV === 'dev'
 
@@ -60,9 +57,9 @@ module.exports = {
             template: './src/pages/item.html',
             filename: 'item.html',
         }),
-        new MiniCssExtractPlugin(),
-        new webpack.DefinePlugin({
-            "process.env": dotenv.parsed
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css'
         }),
+        new Dotenv()
     ],
 }

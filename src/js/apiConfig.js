@@ -1,1 +1,1 @@
-export const LOCAL_SERVER_URL = 'http://localhost:3006/';
+export const LOCAL_SERVER_URL = process.env.LOCAL_SERVER_URL;
