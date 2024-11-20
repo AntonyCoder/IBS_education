@@ -30,6 +30,13 @@ module.exports = {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
     },
+    resolve: {
+        extensions: ['.js', '.json', '.css'],
+        alias: {
+          '@js': path.resolve(__dirname, 'src/js'),
+          '@css': path.resolve(__dirname, 'src/css')
+        }
+    },
     module: {
         rules: [
             {

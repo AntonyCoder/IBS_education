@@ -1,7 +1,7 @@
-import '../js/product.js'
-import '../js/main.js'
-import '../js/search.js'
+import '@js/product'
+import '@js/main'
+import '@js/search'
 
-import '../css/style.css'
-import '../css/catalog.css'
-import '../css/product.css'
+import '@css/style'
+import '@css/catalog'
+import '@css/product'
