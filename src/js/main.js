@@ -2,6 +2,8 @@
 
 import fetchCatalogListData from "./api.js";
 import { LOCAL_SERVER_URL } from "./apiConfig.js";
+import favoriteActiveIcon from '../assets/svg/favorite_active.svg';
+import favoriteDisabledIcon from '../assets/svg/favorite.svg';
 
 //Получение массива данных
 async function getCatalogListData() {
@@ -31,14 +33,14 @@ export function renderCatalogList(items) {
 
         //Создаем элемент ссылки товара
         const productLink = document.createElement('a');
-        productLink.href = `/item.html?id=${item.id}`;
+        productLink.href = `item.html?id=${item.id}`;
         productLink.className = 'item-link';
 
         //Создаем элемент кнопки добавления в избранное
         const favoriteIcon = document.createElement('img');
         favoriteIcon.className = 'item__favorite-icon'
         favoriteIcon.alt = 'favorite';
-        favoriteIcon.src = `${item.like ? 'svg/favorite_active.svg' : 'svg/favorite.svg'}`;
+        favoriteIcon.src = `${item.like ? favoriteActiveIcon : favoriteDisabledIcon}`;
 
         //Создаем элемент изображения
         const productImage = document.createElement('img');
