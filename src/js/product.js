@@ -1,12 +1,18 @@
 'use strict'
 
-import { fetchProductData } from "./api.js";
-import { LOCAL_SERVER_URL } from "./apiConfig.js";
-import favoriteActiveIcon from '../assets/svg/favorite_active.svg';
-import favoriteDisabledIcon from '../assets/svg/favorite.svg';
+import { fetchProductData } from "./api";
+import { LOCAL_SERVER_URL } from "./apiConfig";
+import favoriteActiveIcon from '../assets/svg/favorite_active';
+import favoriteDisabledIcon from '../assets/svg/favorite';
 
 //Получение массива данных
+const itemPage = document.querySelector('.item-page');
+
 async function getProductData() {
+    if (!itemPage) {
+        return;
+    }
+
     try {
         const productId = new URLSearchParams(window.location).get('id');
         const responseData = await fetchProductData(productId);
@@ -17,8 +23,6 @@ async function getProductData() {
 }
 
 function renderProduct(item) {
-    const itemPage = document.querySelector('.item-page');
-
     if (!itemPage) {
         throw new Error("Элемент с классом 'item-page' не найден.");
     }

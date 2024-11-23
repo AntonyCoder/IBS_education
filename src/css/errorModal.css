@@ -1,0 +1,41 @@
+.overlay-error {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+#error-item {
+    margin: 75px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 2px solid #666666;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.error-title {
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+.error-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0.8;
+    transition: all 200ms;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.error-close:hover {
+    opacity: 1;
+}

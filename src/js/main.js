@@ -1,12 +1,18 @@
 'use strict'
 
-import fetchCatalogListData from "./api.js";
-import { LOCAL_SERVER_URL } from "./apiConfig.js";
-import favoriteActiveIcon from '../assets/svg/favorite_active.svg';
-import favoriteDisabledIcon from '../assets/svg/favorite.svg';
+import fetchCatalogListData from "./api";
+import { LOCAL_SERVER_URL } from "./apiConfig";
+import favoriteActiveIcon from '../assets/svg/favorite_active';
+import favoriteDisabledIcon from '../assets/svg/favorite';
 
 //Получение массива данных
+const catalogItems = document.querySelector('.catalog-items');
+
 async function getCatalogListData() {
+    if (!catalogItems) {
+        return;
+    }
+
     try {
         const responseData = await fetchCatalogListData();
         renderCatalogList(responseData);
@@ -16,8 +22,6 @@ async function getCatalogListData() {
 }
 
 export function renderCatalogList(items) {
-    const catalogItems = document.querySelector('.catalog-items');
-
     if (!catalogItems) {
         throw new Error("Элемент с классом 'catalog-items' не найден.");
     }

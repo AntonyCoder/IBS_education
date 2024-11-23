@@ -1,11 +1,19 @@
 'use strict'
-import apiClient from "./apiClient.js";
+import apiClient from "./apiClient";
+
+let catalogCache = null
 
 //Запрос на получение списка товаров
 export default async function fetchCatalogListData() {
     try {
+        if (catalogCache) {
+            console.log("Использую кэшированные данные");
+            return catalogCache;
+        }
+        console.log("Запрашиваю данные с сервера");
         const response = await apiClient.get(`item/`);
-        return response.data.content;
+        catalogCache = response.data.content;
+        return catalogCache;
     } catch (e) {
         console.error('Ошибка:', e);
     }
