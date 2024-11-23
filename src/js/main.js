@@ -6,7 +6,7 @@ import favoriteActiveIcon from '../assets/svg/favorite_active';
 import favoriteDisabledIcon from '../assets/svg/favorite';
 
 //Получение массива данных
-const catalogItems = document.querySelector('.catalog-items');
+export const catalogItems = document.querySelector('.catalog-items');
 
 async function getCatalogListData() {
     if (!catalogItems) {

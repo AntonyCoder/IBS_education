@@ -1,10 +1,15 @@
 'use strict'
-import fetchCatalogListData from "./api"
-import { renderCatalogList } from "./main";
+import fetchCatalogListData from "./api";
+import { catalogItems, renderCatalogList } from "./main";
 import setDebounce from "./debounce";
 
 const searchInput = document.querySelector('.search-field');
+
 async function initSearchCatalog() {
+    if(!catalogItems){
+        return;
+    }
+
     const catalogList = await fetchCatalogListData();
 
     const debouncedRender = setDebounce((query) => {
@@ -12,7 +17,7 @@ async function initSearchCatalog() {
             return item.name.toLowerCase().includes(query);
         });
         renderCatalogList(filteredCatalogList);
-    }, 1000)
+    }, 1000);
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase();
