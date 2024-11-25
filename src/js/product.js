@@ -1,9 +1,9 @@
 'use strict'
 
-import { fetchProductData } from "./api";
-import { LOCAL_SERVER_URL } from "./apiConfig";
-import favoriteActiveIcon from '../assets/svg/favorite_active';
-import favoriteDisabledIcon from '../assets/svg/favorite';
+import { fetchProductData } from "@api/api";
+import { LOCAL_SERVER_URL } from "@api/apiConfig";
+import favoriteActiveIcon from '@svg/favorite_active';
+import favoriteDisabledIcon from '@svg/favorite';
 
 //Получение массива данных
 const itemPage = document.querySelector('.item-page');

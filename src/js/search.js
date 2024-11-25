@@ -1,5 +1,5 @@
 'use strict'
-import fetchCatalogListData from "./api";
+import fetchCatalogListData from "@api/api";
 import { catalogItems, renderCatalogList } from "./main";
 import setDebounce from "./debounce";
 

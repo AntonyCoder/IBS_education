@@ -1,9 +1,9 @@
 'use strict'
 
-import fetchCatalogListData from "./api";
-import { LOCAL_SERVER_URL } from "./apiConfig";
-import favoriteActiveIcon from '../assets/svg/favorite_active';
-import favoriteDisabledIcon from '../assets/svg/favorite';
+import fetchCatalogListData from "@api/api";
+import { LOCAL_SERVER_URL } from "@api/apiConfig";
+import favoriteActiveIcon from '@svg/favorite_active';
+import favoriteDisabledIcon from '@svg/favorite';
 
 //Получение массива данных
 export const catalogItems = document.querySelector('.catalog-items');
