@@ -1,18 +1,23 @@
 'use strict'
-import fetchCatalogListData from "./api.js"
-import { renderCatalogList } from "./main.js";
-import setDebounce from "./debounce.js";
+import fetchCatalogListData from "@api/api";
+import { catalogItems, renderCatalogList } from "./main";
+import setDebounce from "./debounce";
+
+const searchInput = document.querySelector('.search-field');
 
 async function initSearchCatalog() {
+    if(!catalogItems){
+        return;
+    }
+
     const catalogList = await fetchCatalogListData();
-    const searchInput = document.querySelector('.search-field');
 
     const debouncedRender = setDebounce((query) => {
         const filteredCatalogList = catalogList.filter(item => {
             return item.name.toLowerCase().includes(query);
         });
         renderCatalogList(filteredCatalogList);
-    }, 1000)
+    }, 1000);
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase();
@@ -20,4 +25,6 @@ async function initSearchCatalog() {
     });
 }
 
-initSearchCatalog();
+searchInput.addEventListener('focus', () => {
+    initSearchCatalog();
+});

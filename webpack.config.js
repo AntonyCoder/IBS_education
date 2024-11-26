@@ -31,10 +31,12 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.js', '.json', '.css'],
+        extensions: ['.js', '.json', '.css', '.svg'],
         alias: {
           '@js': path.resolve(__dirname, 'src/js'),
-          '@css': path.resolve(__dirname, 'src/css')
+          '@css': path.resolve(__dirname, 'src/css'),
+          '@svg': path.resolve(__dirname, 'src/assets/svg'),
+          '@api': path.resolve(__dirname, 'src/js/api')
         }
     },
     module: {
