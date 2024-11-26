@@ -29,6 +29,15 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 5500,
+        historyApiFallback: true,
     },
     resolve: {
         extensions: ['.js', '.json', '.css', '.svg', '.jsx', '.scss'],
@@ -76,10 +85,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/pages/index.html',
             filename: 'index.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/pages/item.html',
-            filename: 'item.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'

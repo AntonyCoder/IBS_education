@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import favoriteActiveIcon from '@svg/favorite_active';
 import favoriteDisabledIcon from '@svg/favorite';
@@ -7,7 +8,7 @@ import './catalogCard.scss';
 const CatalogItem = ({ item }) => {
     return (
       <div className="item">
-        <a href={`item.html?id=${item.id}`} className="item-link">
+        <Link to={`/product/${item.id}`} className="item-link">
           <img
             className="item__favorite-icon"
             alt="favorite"
@@ -22,7 +23,7 @@ const CatalogItem = ({ item }) => {
           <span className="item-price">
             {item.price.value} {item.price.currency}
           </span>
-        </a>
+        </Link>
       </div>
     );
   };

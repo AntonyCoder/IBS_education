@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import fetchCatalogListData from "@api/api";
 import initSearch from "../../js/search";
+import shoppingCart from "../../assets/svg/shopping_cart";
+import account from "../../assets/svg/account_circle";
 import './header.scss';
 
 const Header = ({ onFilter }) => {
-    const [searchQuery, setSearchQuery] = useState(''); // Текущий поисковый запрос
-    const [items, setItems] = useState([]); // Все товары
+    const [searchQuery, setSearchQuery] = useState(''); 
+    const [items, setItems] = useState([]); 
 
-    // Загрузка всех товаров
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await fetchCatalogListData();
                 setItems(data);
-                onFilter(data); // Передаем все товары в родительский компонент (App)
+                onFilter(data); 
             } catch (error) {
                 console.error('Ошибка при загрузке данных:', error);
             }
@@ -21,19 +22,16 @@ const Header = ({ onFilter }) => {
         fetchData();
     }, [onFilter]);
 
-    // Инициализация функции для поиска с debounce
-    const handleSearch = initSearch(items, onFilter, 1000);
+    const handleSearch = initSearch(items, onFilter, 1200);
 
-    // Обработчик изменения поискового запроса
     const handleInputChange = (event) => {
         const query = event.target.value;
         setSearchQuery(query);
-        handleSearch(query); // Запускаем фильтрацию
+        handleSearch(query);
     };
 
-    // Фокус на поле поиска
     const handleFocus = () => {
-        handleSearch(searchQuery); // Активируем фильтрацию при фокусе
+        handleSearch(searchQuery); 
     };
 
     return (
@@ -50,10 +48,10 @@ const Header = ({ onFilter }) => {
             </div>
             <div className="header__icon-wrapper">
                 <a href="#" className="btn">
-                    <img src="../src/assets/svg/shopping_cart.svg" alt="shopping-cart" />
+                    <img src={shoppingCart} alt="shopping-cart" />
                 </a>
                 <a href="#" className="btn">
-                    <img src="../src/assets/svg/account_circle.svg" alt="account" />
+                    <img src={account} alt="account" />
                 </a>
             </div>
         </header>
