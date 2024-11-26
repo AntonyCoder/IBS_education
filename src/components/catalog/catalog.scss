@@ -1,0 +1,10 @@
+.catalog {
+    padding: 0 16px;
+
+    &-items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}

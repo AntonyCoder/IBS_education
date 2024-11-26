@@ -25,26 +25,22 @@ const optimization = () => {
 }
 
 module.exports = {
-    entry: './src/js/index.js',
+    entry: './src/index.js',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.js', '.json', '.css', '.svg'],
+        extensions: ['.js', '.json', '.css', '.svg', '.jsx', '.scss'],
         alias: {
-          '@js': path.resolve(__dirname, 'src/js'),
-          '@css': path.resolve(__dirname, 'src/css'),
-          '@svg': path.resolve(__dirname, 'src/assets/svg'),
-          '@api': path.resolve(__dirname, 'src/js/api')
+            '@js': path.resolve(__dirname, 'src/js'),
+            '@css': path.resolve(__dirname, 'src/css'),
+            '@svg': path.resolve(__dirname, 'src/assets/svg'),
+            '@api': path.resolve(__dirname, 'src/js/api')
         }
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
             {
                 test: /\.html$/,
                 use: ['html-loader'],
@@ -53,6 +49,21 @@ module.exports = {
                 test: /\.(png|jpg|jpeg|svg|gif)$/i,
                 type: 'asset/inline',
             },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                },
+            }
         ],
     },
     optimization: optimization(),
