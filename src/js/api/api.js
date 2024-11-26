@@ -7,10 +7,8 @@ let catalogCache = null
 export default async function fetchCatalogListData() {
     try {
         if (catalogCache) {
-            console.log("Использую кэшированные данные");
             return catalogCache;
         }
-        console.log("Запрашиваю данные с сервера");
         const response = await apiClient.get(`item/`);
         catalogCache = response.data.content;
         return catalogCache;

@@ -2,7 +2,7 @@ import React from "react";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import favoriteActiveIcon from '@svg/favorite_active';
 import favoriteDisabledIcon from '@svg/favorite';
-import './catalogItem.scss';
+import './catalogCard.scss';
 
 const CatalogItem = ({ item }) => {
     return (

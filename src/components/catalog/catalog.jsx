@@ -1,9 +1,8 @@
 import React from "react";
-import CatalogItem from "../catalogItem/catalogItem";
+import CatalogItem from "../catalogCard/catalogCard";
 import './catalog.scss';
 
 const Catalog = ({ items }) => {
-
     return (
         <section className="catalog">
             <div className="catalog-items">
@@ -16,7 +15,7 @@ const Catalog = ({ items }) => {
                 )}
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Catalog
+export default Catalog;
