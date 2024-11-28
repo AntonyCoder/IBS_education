@@ -10,7 +10,6 @@ const Product = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
 
-    // Загрузка данных товара
     useEffect(() => {
         const getProductData = async () => {
             try {

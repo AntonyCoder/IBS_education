@@ -7,7 +7,6 @@ export const setErrorCallback = (callback) => {
 
 
 export const showError = (message) => {
-    console.log('Showing error:', message);
   if (errorCallback) {
     errorCallback(message);
   }

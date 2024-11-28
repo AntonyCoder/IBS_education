@@ -7,28 +7,39 @@ const ErrorContext = createContext();
 export const useError = () => useContext(ErrorContext);
 
 export const ErrorProvider = ({ children }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorQueue, setErrorQueue] = useState([]);
+  const [currentError, setCurrentError] = useState(null);
 
   const showError = useCallback((message) => {
-    console.log('Received error message:', message);
-    setErrorMessage(message);
-    setIsModalOpen(true);
+    setErrorQueue((prevQueue) => [...prevQueue, message]);
   }, []);
 
   useEffect(() => {
-    console.log('Setting error callback');
     setErrorCallback(showError);
   }, [showError]);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  useEffect(() => {
+    if (!currentError && errorQueue.length > 0) {
+      setCurrentError(errorQueue[0]);
+    }
+  }, [errorQueue, currentError]);
+
+  const handleCloseModal = () => {
+    setErrorQueue((prevQueue) => prevQueue.slice(1));
+    setCurrentError(null);
   };
 
   return (
     <ErrorContext.Provider value={{ showError }}>
       {children}
-      <ErrorModal message={errorMessage} isOpen={isModalOpen} onClose={closeModal} />
+      {currentError && (
+        <ErrorModal
+          key={currentError}
+          message={currentError}
+          isOpen={!!currentError}
+          onClose={handleCloseModal}
+        />
+      )}
     </ErrorContext.Provider>
   );
 };

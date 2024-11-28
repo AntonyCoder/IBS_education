@@ -1,17 +1,13 @@
 'use strict'
 import apiClient from "./apiClient";
 
-let catalogCache = null
 
 //Запрос на получение списка товаров
 export default async function fetchCatalogListData() {
     try {
-        if (catalogCache) {
-            return catalogCache;
-        }
         const response = await apiClient.get(`item/`);
-        catalogCache = response.data.content;
-        return catalogCache;
+        const data = response.data.content;
+        return data;
     } catch (e) {
         console.error('Ошибка:', e);
     }
