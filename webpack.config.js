@@ -29,9 +29,10 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: './',
     },
     devServer: {
+        headers: { 'Content-Type': 'text/css' },
         static: {
             directory: path.join(__dirname, 'dist'),
         },
@@ -55,20 +56,12 @@ module.exports = {
                 use: ['html-loader'],
             },
             {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-            {
                 test: /\.(png|jpg|jpeg|svg|gif)$/i,
                 type: 'asset/inline',
             },
             {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                ],
+                test: /\.s?css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.jsx?$/,
@@ -76,7 +69,12 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                 },
-            }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
+            },
         ],
     },
     optimization: optimization(),

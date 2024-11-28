@@ -5,9 +5,9 @@
   "main": "./src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=prod webpack --mode=production",
-    "webpack": "cross-env NODE_ENV=dev webpack --mode=development",
-    "webpack-watch": "webpack --mode=development --watch",
+    "build": "cross-env NODE_ENV=prod webpack --mode production",
+    "webpack": "cross-env NODE_ENV=dev webpack --mode development",
+    "webpack-watch": "webpack --mode development --watch",
     "start": "cross-env NODE_ENV=dev webpack server --mode development --open"
   },
   "author": "",
@@ -40,6 +40,7 @@
     "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^7.0.1",
     "reset-css": "^5.0.2"
   }

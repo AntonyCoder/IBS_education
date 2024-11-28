@@ -3,6 +3,11 @@ import CatalogItem from "../catalogCard/catalogCard";
 import './catalog.scss';
 
 const Catalog = ({ items }) => {
+
+    if(!items || !Array.isArray(items)){
+        return;
+    }
+
     return (
         <section className="catalog">
             <div className="catalog-items">
