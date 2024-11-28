@@ -1,3 +1,4 @@
+@use '@styles/variables' as vars;
 
 .item-page {
     display: flex;
@@ -12,28 +13,28 @@
 }
 
 .image-wrapper {
-    margin-right: 16px;
+    margin-right: 1.6rem;
 }
 
 .item__image-main {
-    padding: 49px 74px;
-    border: 1px solid #f2f2f2;
+    padding: 4.9rem 7.4rem;
+    border: 1px solid vars.$card-background-color;
 }
 
 .item__title-main {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 2.4rem;
     margin: 0 0 16px 0;
 }
 
 .item-description {
-    font-size: 14px;
+    font-size: 1.4rem;
     margin-bottom: 24px;
 }
 
 .item-details {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.8rem;
     margin-bottom: 16px;
 }
 
@@ -44,8 +45,8 @@
 }
 
 .item__price-main {
-    font-size: 36px;
-    color: #e97f03;
+    font-size: 3.6rem;
+    color: vars.$active-color;
     margin-right: 16px;
 }
 
@@ -55,10 +56,10 @@
 
 .control {
     cursor: pointer;
-    border: 1px solid #323232;
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
+    border: 1px solid vars.$primary-color;
+    width: 4rem;
+    height: 4rem;
+    background-color: vars.$white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,13 +69,12 @@
     border: none;
     box-sizing: border-box;
     padding: 0;
-    width: 100px;
-    height: 40px;
-    border-top: 1px solid #323232;
-    border-bottom: 1px solid #323232;
+    width: 10rem;
+    height: 4rem;
+    border-top: 1px solid vars.$primary-color;
+    border-bottom: 1px solid vars.$primary-color;
     text-align: center;
-    font-size: 24px;
-    color: #000;
+    font-size: 2.4rem;
 }
 
 .quantity:focus {
@@ -82,21 +82,21 @@
 }
 
 .add-btn {
-    margin: 0 16px;
-    width: 160px;
-    height: 40px;
+    margin: 0 1.6rem;
+    width: 16rem;
+    height: 4rem;
     border-radius: 10px;
     border: none;
-    background-color: #e97f03;
-    color: #ffffff;
-    font-size: 24px;
+    background-color: vars.$active-color;
+    color: vars.$white;
+    font-size: 2.4rem;
     transition: ease-in-out 0.2s;
     cursor: pointer;
 }
 
 .add-btn:hover {
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
-    background: #e99330;
+    background: vars.$active-color-hover;
 }
 
 /* Мобильная версия */
@@ -104,16 +104,14 @@
 @media (max-width: 870px) {
     .item-page {
         flex-direction: column;
-        margin-bottom: 24px;
+        margin-bottom: 2.4rem;
     }
 
     .image-wrapper {
-        margin: 0 0 16px;
+        margin: 0 0 1.6rem;
         display: flex;
         justify-content: center;
         width: 100vw;
-        background: -webkit-linear-gradient(360deg, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 50%);
-        background: -moz-linear-gradient(360deg, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 50%);
         background: linear-gradient(360deg, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 50%);
     }
 
@@ -123,20 +121,20 @@
 
     .item__image-main {
         padding: 0;
-        margin: 16px 0;
-        height: 168px;
+        margin: 1.6rem 0;
+        height: 16.8rem;
         border: none;
     }
 
     .item__price-main {
         width: calc(100% - 24px);
         order: -1;
-        margin: 0 0 16px 0;
+        margin: 0 0 1.6rem 0;
     }
 
     .favorite__icon-main {
         order: 1;
-        margin-bottom: 16px;
+        margin-bottom: 1.6rem;
     }
 
     .quantity-wrapper {
@@ -144,11 +142,11 @@
     }
 
     .quantity {
-        width: 60px;
+        width: 6rem;
     }
 
     .add-btn {
         order: 3;
-        margin: 0 0 0 27px;
+        margin: 0 0 0 2.7rem;
     }
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import fetchCatalogListData from "@api/api";
-import initSearch from "../../js/search";
-import shoppingCart from "../../assets/svg/shopping_cart";
-import account from "../../assets/svg/account_circle";
+import initSearch from "@js/search";
+import shoppingCart from "@svg/shopping_cart";
+import account from "@svg/account_circle";
 import './header.scss';
 
 const Header = ({ onFilter }) => {
