@@ -5,6 +5,8 @@ import favoriteDisabledIcon from '@svg/favorite';
 import { fetchProductData } from "@api/api";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import './product.scss';
+import removeBtn from '@svg/remove_btn';
+import addBtn from '@svg/add_btn';
 
 const Product = () => {
     const { id } = useParams();
@@ -45,15 +47,11 @@ const Product = () => {
                     </span>
                     <div className="quantity-wrapper">
                         <button className="control">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 13H5V11H19V13Z" fill="#E97F03" />
-                            </svg>
+                            <img src={removeBtn} alt="remove-btn" />
                         </button>
                         <input className="quantity" type="text" defaultValue={1} />
                         <button className="control">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#E97F03" />
-                            </svg>
+                            <img src={addBtn} alt="add-btn" />
                         </button>
                     </div>
                     <button className="add-btn">Add to cart</button>

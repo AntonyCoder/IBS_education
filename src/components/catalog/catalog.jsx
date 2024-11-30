@@ -7,17 +7,20 @@ const Catalog = ({ items }) => {
     if(!items || !Array.isArray(items)){
         return;
     }
+    if(items.length === 0) {
+        return (
+            <div className="catalog-items">
+                <p>Товары не найдены.</p>
+            </div>   
+        )
+    }
 
     return (
         <section className="catalog">
             <div className="catalog-items">
-                {items.length > 0 ? (
-                    items.map((item) => (
+                {items.map((item) => (
                         <CatalogItem key={item.id} item={item} />
-                    ))
-                ) : (
-                    <p>Товары не найдены.</p>
-                )}
+                    ))}
             </div>
         </section>
     );
