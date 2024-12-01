@@ -30,10 +30,10 @@ const Product = () => {
     return (
         <div className="item-page">
             <div className="image-wrapper">
-                <img 
-                    className="item__image-main" 
-                    src={`${LOCAL_SERVER_URL}${product.picture.path}`} 
-                    alt={product.picture.alt} 
+                <img
+                    className="item__image-main"
+                    src={`${LOCAL_SERVER_URL}${product.picture.path}`}
+                    alt={product.picture.alt}
                 />
             </div>
             <div className="item-information">
@@ -55,10 +55,10 @@ const Product = () => {
                         </button>
                     </div>
                     <button className="add-btn">Add to cart</button>
-                    <img 
-                        className="favorite__icon-main" 
-                        src={product.like ? favoriteActiveIcon : favoriteDisabledIcon} 
-                        alt="favorite" 
+                    <img
+                        className="favorite__icon-main"
+                        src={product.like ? favoriteActiveIcon : favoriteDisabledIcon}
+                        alt="favorite"
                     />
                 </div>
             </div>
