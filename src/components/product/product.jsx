@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "@slices/productSlice";
 import favoriteActiveIcon from '@svg/favorite_active';
 import favoriteDisabledIcon from '@svg/favorite';
-import { fetchProductData } from "@api/api";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import './product.scss';
 import removeBtn from '@svg/remove_btn';
@@ -10,22 +11,19 @@ import addBtn from '@svg/add_btn';
 
 const Product = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState(null);
+    const dispatch = useDispatch();
+
+    const { product, status, error } = useSelector((state) => state.product)
 
     useEffect(() => {
-        const getProductData = async () => {
-            try {
-                const data = await fetchProductData(id);
-                setProduct(data.content);
-            } catch (e) {
-                console.error('Ошибка при загрузке данных товара:', e);
-            }
-        };
+       dispatch(fetchProduct(id))
+    }, [id, dispatch]);
 
-        getProductData();
-    }, [id]);
+     if (status === 'loading') return <p>Загрузка...</p>;
 
-    if (!product) return <p>Загрузка...</p>;
+     if (status === 'failed') return <p>Ошибка при загрузке данных: {error}</p>;
+ 
+     if (!product) return <p>Товар не найден.</p>;
 
     return (
         <div className="item-page">

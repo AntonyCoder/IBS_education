@@ -1,32 +1,35 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useEffect} from 'react';
 import { setErrorCallback } from '@js/errorService';
 import ErrorModal from './errorModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice';
 
 const ErrorContext = createContext();
 
 export const useError = () => useContext(ErrorContext);
 
 export const ErrorProvider = ({ children }) => {
-  const [errorQueue, setErrorQueue] = useState([]);
-  const [currentError, setCurrentError] = useState(null);
+  const dispatch = useDispatch();
 
-  const showError = useCallback((message) => {
-    setErrorQueue((prevQueue) => [...prevQueue, message]);
-  }, []);
+  const { errorQueue, currentError } = useSelector((state) => state.error);
+
+  const showError = (message) => {
+    dispatch(addError(message));
+  }
 
   useEffect(() => {
     setErrorCallback(showError);
-  }, [showError]);
+  }, [dispatch, showError]);
 
   useEffect(() => {
     if (!currentError && errorQueue.length > 0) {
-      setCurrentError(errorQueue[0]);
+      dispatch(setCurrentError(errorQueue[0]));
     }
-  }, [errorQueue, currentError]);
+  }, [dispatch, errorQueue, currentError]);
 
   const handleCloseModal = () => {
-    setErrorQueue((prevQueue) => prevQueue.slice(1));
-    setCurrentError(null);
+    dispatch(removeError());
+    dispatch(clearCurrentError());
   };
 
   return (

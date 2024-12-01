@@ -1,26 +1,33 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import CatalogItem from "../catalogCard/catalogCard";
 import './catalog.scss';
 
-const Catalog = ({ items }) => {
+const Catalog = () => {
+    const { filteredItems, status, error } = useSelector((state) => state.catalog);
 
-    if(!items || !Array.isArray(items)){
-        return;
+    if (status === 'loading') {
+        return <p>Loading...</p>;
     }
-    if(items.length === 0) {
+
+    if (status === 'failed') {
+        return <p>Error: {error}</p>;
+    }
+
+    if (!filteredItems || filteredItems.length === 0) {
         return (
             <div className="catalog-items">
                 <p>Товары не найдены.</p>
-            </div>   
-        )
+            </div>
+        );
     }
 
     return (
         <section className="catalog">
             <div className="catalog-items">
-                {items.map((item) => (
-                        <CatalogItem key={item.id} item={item} />
-                    ))}
+                {filteredItems.map((item) => (
+                    <CatalogItem key={item.id} item={item} />
+                ))}
             </div>
         </section>
     );

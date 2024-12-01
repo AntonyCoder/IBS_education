@@ -47,6 +47,7 @@ module.exports = {
             '@svg': path.resolve(__dirname, 'src/assets/svg'),
             '@api': path.resolve(__dirname, 'src/js/api'),
             '@styles': path.resolve(__dirname, 'src/styles'),
+            '@slices': path.resolve(__dirname, 'src/slices'),
         }
     },
     module: {
