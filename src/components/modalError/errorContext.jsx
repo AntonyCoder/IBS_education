@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect} from 'react';
-import { setErrorCallback } from '@js/errorService';
+import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './errorModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice";
-import setDebounce from "@js/debounce";
+import setDebounce from "@utils/debounce";
 import shoppingCart from "@svg/shopping_cart";
 import account from "@svg/account_circle";
 import './header.scss';
