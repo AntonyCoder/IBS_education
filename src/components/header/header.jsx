@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fetchCatalogListData from "@api/api";
-import initSearch from "@js/search";
+import initSearch from "@utils/search";
 import shoppingCart from "@svg/shopping_cart";
 import account from "@svg/account_circle";
 import './header.scss';

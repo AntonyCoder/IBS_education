@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { setErrorCallback } from '@js/errorService';
+import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './errorModal';
 
 const ErrorContext = createContext();

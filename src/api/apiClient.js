@@ -1,7 +1,7 @@
 'use strict'
 import axios from "axios";
 import { LOCAL_SERVER_URL } from "./apiConfig";
-import { showError } from "../errorService";
+import { showError } from "@helpers/errorService";
 
 const apiClient = axios.create({
     baseURL: LOCAL_SERVER_URL,

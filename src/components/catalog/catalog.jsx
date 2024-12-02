@@ -7,7 +7,7 @@ const Catalog = ({ items }) => {
     if(!items || !Array.isArray(items)){
         return;
     }
-    if(items.length === 0) {
+    if(!items.length) {
         return (
             <div className="catalog-items">
                 <p>Товары не найдены.</p>
