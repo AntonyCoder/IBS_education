@@ -7,14 +7,14 @@ const Catalog = () => {
     const { filteredItems, status, error } = useSelector((state) => state.catalog);
 
     if (status === 'loading') {
-        return <p>Loading...</p>;
+        return <p>Загрузка...</p>;
     }
 
     if (status === 'failed') {
         return <p>Error: {error}</p>;
     }
 
-    if (!filteredItems || filteredItems.length === 0) {
+    if (!filteredItems || !filteredItems.length) {
         return (
             <div className="catalog-items">
                 <p>Товары не найдены.</p>
