@@ -1,3 +1,5 @@
+@use '@styles/variables' as vars;
+
 .overlay-error {
     position: absolute;
     top: 0;
@@ -7,32 +9,32 @@
     background: rgba(0, 0, 0, 0.1);
 }
 
-#error-item {
-    margin: 75px auto;
-    padding: 20px;
-    background: #ffffff;
-    border: 2px solid #666666;
+.error-item {
+    margin: 7.5rem auto;
+    padding: 2rem;
+    background: vars.$white;
+    border: 2px solid vars.$secondary-color;
     border-radius: 10px;
-    width: 350px;
+    width: 35rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
 .error-title {
-    margin-bottom: 30px;
-    font-size: 22px;
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
 }
 
 .error-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 2rem;
+    right: 2rem;
     opacity: 0.8;
     transition: all 200ms;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: bold;
     text-decoration: none;
-    color: #666;
+    color: vars.$secondary-color;
     cursor: pointer;
 }
 

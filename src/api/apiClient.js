@@ -1,7 +1,7 @@
 'use strict'
 import axios from "axios";
 import { LOCAL_SERVER_URL } from "./apiConfig";
-import showErrorModal from "../errorModal";
+import { showError } from "@helpers/errorService";
 
 const apiClient = axios.create({
     baseURL: LOCAL_SERVER_URL,
@@ -13,14 +13,14 @@ apiClient.interceptors.response.use(
     error => {
         if (error.response) {
             console.error(`Ошибка HTTP: ${error.response.status}`);
-            showErrorModal(`Ошибка HTTP: ${error.response.status}`);
+            showError(`Ошибка HTTP: ${error.response.status}`);
         }
         if (error.request) {
             console.error('Сервер не отвечает');
-            showErrorModal('Сервер не отвечает');
+            showError('Сервер не отвечает');
         }
         console.error(`Ошибка настройки запроса: ${error.message}`);
-        showErrorModal(`Ошибка настройки запроса: ${error.message}`);
+        showError(`Ошибка настройки запроса: ${error.message}`);
 
         return Promise.reject(error);
     }

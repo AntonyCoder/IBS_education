@@ -25,26 +25,33 @@ const optimization = () => {
 }
 
 module.exports = {
-    entry: './src/js/index.js',
+    entry: './src/index.js',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: './',
+    },
+    devServer: {
+        headers: { 'Content-Type': 'text/css' },
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 5500,
+        historyApiFallback: true,
     },
     resolve: {
-        extensions: ['.js', '.json', '.css', '.svg'],
+        extensions: ['.js', '.json', '.svg', '.jsx', '.scss'],
         alias: {
-          '@js': path.resolve(__dirname, 'src/js'),
-          '@css': path.resolve(__dirname, 'src/css'),
-          '@svg': path.resolve(__dirname, 'src/assets/svg'),
-          '@api': path.resolve(__dirname, 'src/js/api')
+            '@svg': path.resolve(__dirname, 'src/assets/svg'),
+            '@api': path.resolve(__dirname, 'src/api'),
+            '@styles': path.resolve(__dirname, 'src/styles'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
+            '@helpers': path.resolve(__dirname, 'src/helpers'),
         }
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
             {
                 test: /\.html$/,
                 use: ['html-loader'],
@@ -52,6 +59,22 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpeg|svg|gif)$/i,
                 type: 'asset/inline',
+            },
+            {
+                test: /\.s?css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                },
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
             },
         ],
     },
@@ -61,10 +84,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/pages/index.html',
             filename: 'index.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/pages/item.html',
-            filename: 'item.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
