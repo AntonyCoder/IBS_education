@@ -10,6 +10,7 @@ const Catalog = () => {
         return <p>Загрузка...</p>;
     }
 
+
     if (status === 'failed') {
         return <p>Error: {error}</p>;
     }

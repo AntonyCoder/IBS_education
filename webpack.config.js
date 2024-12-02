@@ -43,11 +43,12 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.svg', '.jsx', '.scss'],
         alias: {
-            '@js': path.resolve(__dirname, 'src/js'),
             '@svg': path.resolve(__dirname, 'src/assets/svg'),
-            '@api': path.resolve(__dirname, 'src/js/api'),
+            '@api': path.resolve(__dirname, 'src/api'),
             '@styles': path.resolve(__dirname, 'src/styles'),
             '@slices': path.resolve(__dirname, 'src/slices'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
+            '@helpers': path.resolve(__dirname, 'src/helpers'),
         }
     },
     module: {
