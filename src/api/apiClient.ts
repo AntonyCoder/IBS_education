@@ -1,16 +1,16 @@
 'use strict'
-import axios from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { LOCAL_SERVER_URL } from "./apiConfig";
 import { showError } from "@helpers/errorService";
 
-const apiClient = axios.create({
+const apiClient: AxiosInstance = axios.create({
     baseURL: LOCAL_SERVER_URL,
     timeout: 1000
 });
 
 apiClient.interceptors.response.use(
-    response => response,
-    error => {
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => {
         if (error.response) {
             console.error(`Ошибка HTTP: ${error.response.status}`);
             showError(`Ошибка HTTP: ${error.response.status}`);

@@ -1,7 +1,13 @@
 import React from 'react';
 import './errorModal.scss'; 
 
-const ErrorModal = ({ isOpen, message, onClose }) => {
+interface ErrorModalProps {
+  isOpen: boolean;
+  message: string;
+  onClose: () => void;
+}
+
+const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, message, onClose }) => {
   if (!isOpen) return null;
 
   return (

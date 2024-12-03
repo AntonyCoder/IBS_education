@@ -3,8 +3,23 @@ import { useSelector } from "react-redux";
 import CatalogItem from "../catalogCard/catalogCard";
 import './catalog.scss';
 
-const Catalog = () => {
-    const { filteredItems, status, error } = useSelector((state) => state.catalog);
+interface CatalogItemType {
+    id: string;
+    name: string;
+    price: { value: number; currency: string };
+    picture: { path: string; alt: string };
+    like: boolean;
+}
+
+interface CatalogState {
+    filteredItems: CatalogItemType[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+
+const Catalog: React.FC = () => {
+    const { filteredItems, status, error } = useSelector((state: { catalog: CatalogState }) => state.catalog);
 
     if (status === 'loading') {
         return <p>Загрузка...</p>;

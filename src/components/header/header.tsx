@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice";
 import setDebounce from "@utils/debounce";
@@ -6,11 +6,15 @@ import shoppingCart from "@svg/shopping_cart";
 import account from "@svg/account_circle";
 import './header.scss';
 
-const Header = () => {
-    const dispatch = useDispatch();
-    const [searchQuery, setSearchQuery] = useState('');
+interface CatalogState {
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+}
 
-    const { status } = useSelector((state) => state.catalog);
+const Header: React.FC = () => {
+    const dispatch = useDispatch();
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const { status } = useSelector((state: { catalog: CatalogState }) => state.catalog);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -18,11 +22,11 @@ const Header = () => {
         }
     }, [status, dispatch]);
 
-    const handleSearch = setDebounce((query) => {
+    const handleSearch = setDebounce((query: string) => {
         dispatch(filterItems(query));
     }, 1000);  
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
         setSearchQuery(query);
         handleSearch(query);

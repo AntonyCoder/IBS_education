@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Catalog from "./components/catalog/catalog";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Product from "./components/product/product";

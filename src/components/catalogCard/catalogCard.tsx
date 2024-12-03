@@ -1,11 +1,34 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import favoriteActiveIcon from '@svg/favorite_active';
 import favoriteDisabledIcon from '@svg/favorite';
 import './catalogCard.scss';
 
-const CatalogItem = ({ item }) => {
+interface Price {
+  value: number;
+  currency: string;
+}
+
+interface Picture {
+  path: string;
+  alt: string;
+}
+
+interface CatalogItemType {
+  id: string;
+  name: string;
+  picture: Picture;
+  price: Price;
+  like: boolean;
+}
+
+interface CatalogItemProps {
+  item: CatalogItemType;
+}
+
+
+const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
     return (
       <div className="item">
         <Link to={`/product/${item.id}`} className="item-link">

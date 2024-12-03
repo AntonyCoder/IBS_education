@@ -1,0 +1,1 @@
+export const LOCAL_SERVER_URL: string = process.env.LOCAL_SERVER_URL || '';

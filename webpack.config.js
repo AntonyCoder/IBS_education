@@ -25,7 +25,7 @@ const optimization = () => {
 }
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -41,7 +41,7 @@ module.exports = {
         historyApiFallback: true,
     },
     resolve: {
-        extensions: ['.js', '.json', '.svg', '.jsx', '.scss'],
+        extensions: ['.js', '.json', '.svg', '.jsx', '.scss', '.tsx', '.ts'],
         alias: {
             '@svg': path.resolve(__dirname, 'src/assets/svg'),
             '@api': path.resolve(__dirname, 'src/api'),
@@ -53,6 +53,11 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+              },
             {
                 test: /\.html$/,
                 use: ['html-loader'],

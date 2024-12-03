@@ -9,14 +9,38 @@ import './product.scss';
 import removeBtn from '@svg/remove_btn';
 import addBtn from '@svg/add_btn';
 
-const Product = () => {
-    const { id } = useParams();
+interface ProductType {
+    id: string;
+    name: string;
+    info: string;
+    details: string;
+    price: {
+        value: number;
+        currency: string;
+    };
+    picture: {
+        path: string;
+        alt: string;
+    };
+    like: boolean;
+}
+
+interface ProductState {
+    product: ProductType | null;
+    status:  'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+const Product: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
     const dispatch = useDispatch();
 
-    const { product, status, error } = useSelector((state) => state.product)
+    const { product, status, error } = useSelector((state: { product: ProductState }) => state.product)
 
     useEffect(() => {
-       dispatch(fetchProduct(id))
+        if(id) {
+            dispatch(fetchProduct(id))
+        }
     }, [id, dispatch]);
 
      if (status === 'loading') return <p>Загрузка...</p>;
