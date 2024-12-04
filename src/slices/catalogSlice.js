@@ -12,7 +12,8 @@ export const fetchCatalog = createAsyncThunk(
 const catalogSlice = createSlice({
     name: 'catalog',
     initialState: {
-        filterItems: [],
+        items: [],
+        filteredItems: [],
         loading: false,
         status: 'idle',
     },

@@ -49,6 +49,7 @@ module.exports = {
             '@slices': path.resolve(__dirname, 'src/slices'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
+            '@const': path.resolve(__dirname, 'src/constants'),
         }
     },
     module: {

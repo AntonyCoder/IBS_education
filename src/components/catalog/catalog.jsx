@@ -2,16 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CatalogItem from "../catalogCard/catalogCard";
 import './catalog.scss';
+import { Status } from "@const/status.constants";
 
 const Catalog = () => {
     const { filteredItems, status, error } = useSelector((state) => state.catalog);
 
-    if (status === 'loading') {
+    if (status === Status.Loading) {
         return <p>Загрузка...</p>;
     }
 
-
-    if (status === 'failed') {
+    if (status === Status.Failed) {
         return <p>Error: {error}</p>;
     }
 

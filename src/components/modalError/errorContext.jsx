@@ -1,16 +1,11 @@
-import React, { createContext, useContext, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './errorModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice';
 
-const ErrorContext = createContext();
-
-export const useError = () => useContext(ErrorContext);
-
 export const ErrorProvider = ({ children }) => {
   const dispatch = useDispatch();
-
   const { errorQueue, currentError } = useSelector((state) => state.error);
 
   const showError = (message) => {
@@ -33,7 +28,7 @@ export const ErrorProvider = ({ children }) => {
   };
 
   return (
-    <ErrorContext.Provider value={{ showError }}>
+    <>
       {children}
       {currentError && (
         <ErrorModal
@@ -43,6 +38,6 @@ export const ErrorProvider = ({ children }) => {
           onClose={handleCloseModal}
         />
       )}
-    </ErrorContext.Provider>
+    </>
   );
 };
