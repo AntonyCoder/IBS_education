@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from "react";
-import fetchCatalogListData from "@api/api";
-import initSearch from "@utils/search";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCatalog, filterItems } from "@slices/catalogSlice";
+import setDebounce from "@utils/debounce";
 import shoppingCart from "@svg/shopping_cart";
 import account from "@svg/account_circle";
 import './header.scss';
 
-const Header = ({ onFilter }) => {
-    const [searchQuery, setSearchQuery] = useState(''); 
-    const [items, setItems] = useState([]); 
+const Header = () => {
+    const dispatch = useDispatch();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const { status } = useSelector((state) => state.catalog);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await fetchCatalogListData();
-                setItems(data);
-                onFilter(data); 
-            } catch (error) {
-                console.error('Ошибка при загрузке данных:', error);
-            }
-        };
-        fetchData();
-    }, [onFilter]);
+        if (status === 'idle') {
+            dispatch(fetchCatalog());
+        }
+    }, [status, dispatch]);
 
-    const handleSearch = initSearch(items, onFilter, 1200);
+    const handleSearch = setDebounce((query) => {
+        dispatch(filterItems(query));
+    }, 1000);  
 
     const handleInputChange = (event) => {
         const query = event.target.value;
         setSearchQuery(query);
         handleSearch(query);
-    };
-
-    const handleFocus = () => {
-        handleSearch(searchQuery); 
     };
 
     return (
@@ -43,7 +37,6 @@ const Header = ({ onFilter }) => {
                     placeholder="Search products"
                     value={searchQuery}
                     onChange={handleInputChange}
-                    onFocus={handleFocus}
                 />
             </div>
             <div className="header__icon-wrapper">

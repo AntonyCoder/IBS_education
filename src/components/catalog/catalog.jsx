@@ -1,26 +1,34 @@
 import React from "react";
-import CatalogItem from "../catalogCard/catalogCard";
+import { useSelector } from "react-redux";
+import CatalogItem from "@components/catalogCard/catalogCard";
 import './catalog.scss';
+import { Status } from "@const/status.constants";
 
-const Catalog = ({ items }) => {
+const Catalog = () => {
+    const { filteredItems, status, error } = useSelector((state) => state.catalog);
 
-    if(!items || !Array.isArray(items)){
-        return;
+    if (status === Status.Loading) {
+        return <p>Загрузка...</p>;
     }
-    if(!items.length) {
+
+    if (status === Status.Failed) {
+        return <p>Error: {error}</p>;
+    }
+
+    if (!filteredItems || !filteredItems.length) {
         return (
             <div className="catalog-items">
                 <p>Товары не найдены.</p>
-            </div>   
-        )
+            </div>
+        );
     }
 
     return (
         <section className="catalog">
             <div className="catalog-items">
-                {items.map((item) => (
-                        <CatalogItem key={item.id} item={item} />
-                    ))}
+                {filteredItems.map((item) => (
+                    <CatalogItem key={item.id} item={item} />
+                ))}
             </div>
         </section>
     );
