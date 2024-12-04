@@ -26,7 +26,6 @@ const Catalog: React.FC = () => {
         return <p>Загрузка...</p>;
     }
 
-
     if (status === Status.Failed) {
         return <p>Error: {error}</p>;
     }
