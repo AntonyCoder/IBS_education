@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CatalogItem from "../catalogCard/catalogCard";
+import CatalogItem from "@components/catalogCard/catalogCard";
 import './catalog.scss';
 import { Status } from "@const/status.constants";
 

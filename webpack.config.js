@@ -50,6 +50,10 @@ module.exports = {
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
             '@const': path.resolve(__dirname, 'src/constants'),
+            '@header': path.resolve(__dirname, 'src/components/header'),
+            '@components': path.resolve(__dirname, 'src/components'),
+            '@layouts': path.resolve(__dirname, 'src/layouts'),
+            '@pages': path.resolve(__dirname, 'src/pages'),
         }
     },
     module: {
@@ -84,7 +88,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/pages/index.html',
+            template: './src/public/index.html',
             filename: 'index.html',
         }),
         new MiniCssExtractPlugin({

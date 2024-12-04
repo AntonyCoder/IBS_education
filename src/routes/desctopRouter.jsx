@@ -1,17 +1,17 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Layout from "../components/layouts/layout";
-import Catalog from "../components/catalog/catalog";
-import Product from "../components/product/product";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import MainLayout from "@layouts/mainLayout";
+import CatalogLayout from "@pages/catalogPage";
+import ProductLayout from "@pages/productPage";
 
 const DesctopRouter = () => {
-    return(
-        <Routes>
-            <Route path='/' element={<Layout />}>
-                <Route index element={<Catalog />}/>
-                <Route path="/product/:id" element={<Product />} />
-            </Route>
-        </Routes>
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<MainLayout><CatalogLayout /></MainLayout>} />
+                <Route path="/product/:id" element={<MainLayout><ProductLayout /></MainLayout>} />
+            </Routes>
+        </Router >
     )
 }
 
