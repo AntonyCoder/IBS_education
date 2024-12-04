@@ -1,11 +1,14 @@
 import React from "react";
 import Product from '@components/product/product';
+import MainLayout from "@layouts/mainLayout";
 
 
-const ProductLayout = () => {
+const ProductPage = () => {
     return (
-        <Product />
+        <MainLayout>
+            <Product />
+        </MainLayout>
     )
 }
 
-export default ProductLayout;
+export default ProductPage;

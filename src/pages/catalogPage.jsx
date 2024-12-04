@@ -1,11 +1,15 @@
 import React from "react";
 import Catalog from '@components/catalog/catalog';
+import MainLayout from "@layouts/mainLayout";
 
 
-const CatalogLayout = () => {
+const CatalogPage = () => {
     return (
-        <Catalog />
+        <MainLayout>
+            <Catalog />
+        </MainLayout>
+
     )
 }
 
-export default CatalogLayout;
+export default CatalogPage;
