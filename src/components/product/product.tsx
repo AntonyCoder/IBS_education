@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "@slices/productSlice";
-import favoriteActiveIcon from '@svg/favorite_active';
-import favoriteDisabledIcon from '@svg/favorite';
+import favoriteActiveIcon from '@svg/favorite_active.svg';
+import favoriteDisabledIcon from '@svg/favorite.svg';
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import './product.scss';
-import removeBtn from '@svg/remove_btn';
-import addBtn from '@svg/add_btn';
+import removeBtn from '@svg/remove_btn.svg';
+import addBtn from '@svg/add_btn.svg';
+import { AppDispatch } from "src/store";
 
 interface ProductType {
     id: string;
@@ -33,7 +34,7 @@ interface ProductState {
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const { product, status, error } = useSelector((state: { product: ProductState }) => state.product)
 

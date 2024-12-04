@@ -2,16 +2,17 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice";
 import setDebounce from "@utils/debounce";
-import shoppingCart from "@svg/shopping_cart";
-import account from "@svg/account_circle";
+import shoppingCart from "@svg/shopping_cart.svg";
+import account from "@svg/account_circle.svg";
 import './header.scss';
+import { AppDispatch } from "src/store";
 
 interface CatalogState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
 const Header: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const { status } = useSelector((state: { catalog: CatalogState }) => state.catalog);

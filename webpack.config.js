@@ -25,7 +25,7 @@ const optimization = () => {
 }
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -54,6 +54,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.svg$/,
+                use: ['@svgr/webpack', 'file-loader'],
+            },
+            {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
@@ -79,8 +83,8 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
                 use: 'babel-loader',
+                exclude: /node_modules/,
             },
         ],
     },

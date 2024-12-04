@@ -6,8 +6,8 @@ interface Error {
 }
 
 interface ErrorState {
-    errorQueue: Error[];
-    currentError: Error | null;
+    errorQueue: string[];
+    currentError: string | null;
 }
 
 const initialState: ErrorState = {
@@ -19,13 +19,13 @@ const errorSlice = createSlice({
     name: 'error',
     initialState,
     reducers: {
-        addError: (state, action: PayloadAction<Error>) => {
+        addError: (state, action: PayloadAction<string>) => {
             state.errorQueue.push(action.payload);
         },
         removeError: (state) => {
             state.errorQueue.shift();
         },
-        setCurrentError: (state, action: PayloadAction<Error | null>) => {
+        setCurrentError: (state, action: PayloadAction<string | null>) => {
             state.currentError = action.payload;
         },
         clearCurrentError: (state) => {
