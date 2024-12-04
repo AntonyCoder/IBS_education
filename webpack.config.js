@@ -50,7 +50,6 @@ module.exports = {
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
             '@enums': path.resolve(__dirname, 'src/enums'),
-            '@const': path.resolve(__dirname, 'src/constants'),
             '@header': path.resolve(__dirname, 'src/components/header'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),

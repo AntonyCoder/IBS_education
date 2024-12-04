@@ -1,9 +1,9 @@
 import React from "react";
-import Catalog from '@components/catalog/catalog';
+import Catalog from '@components/catalog/index';
 import MainLayout from "@layouts/mainLayout";
 
 
-const CatalogPage = () => {
+const CatalogPage: React.FC = () => {
     return (
         <MainLayout>
             <Catalog />

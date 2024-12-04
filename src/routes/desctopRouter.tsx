@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import CatalogPage from "@pages/catalogPage";
 import ProductPage from "@pages/productPage";
 
-const DesctopRouter = () => {
+const DesctopRouter: React.FC = () => {
     return (
         <Router>
             <Routes>

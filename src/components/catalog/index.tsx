@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CatalogItem from "../catalogCard";
+import CatalogItem from "@components/catalogCard/index";
 import './catalog.styles.scss';
 import { Status } from "@enums/status.enums";
 
