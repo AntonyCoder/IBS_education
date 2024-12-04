@@ -4,7 +4,7 @@ import { fetchProductData } from '@api/api';
 interface Product {
     id: string;
     name: string;
-    description: string;
+    info: string;
     [key: string]: any;
 }
 
@@ -27,7 +27,7 @@ export const fetchProduct = createAsyncThunk<Product, string>(
         if(!response) {
             throw new Error ('Не удалось загрузить данные');
         }
-        return response.content;
+        return response;
     }
 );
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CatalogItem from "../catalogCard/catalogCard";
-import './catalog.scss';
+import CatalogItem from "../catalogCard";
+import './catalog.styles.scss';
 
 interface CatalogItemType {
     id: string;

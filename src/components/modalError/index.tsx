@@ -1,5 +1,5 @@
 import React from 'react';
-import './errorModal.scss'; 
+import './errorModal.styles.scss'; 
 
 interface ErrorModalProps {
   isOpen: boolean;

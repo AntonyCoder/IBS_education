@@ -54,10 +54,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.svg$/,
-                use: ['@svgr/webpack', 'file-loader'],
-            },
-            {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
@@ -92,7 +88,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/pages/index.html',
+            template: './src/public/index.html',
             filename: 'index.html',
         }),
         new MiniCssExtractPlugin({

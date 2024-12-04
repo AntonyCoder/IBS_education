@@ -46,6 +46,8 @@ export default async function fetchCatalogListData(): Promise<CatalogItem[]> {
 export async function fetchProductData(itemId: string): Promise<ProductDetails | undefined> {
     try {
         const response = await apiClient.get<ApiResponse<ProductDetails>>(`item/${itemId}`);
+        console.log('API Response:', response.data.content);
+        
         if (response.data?.content) {
             return response.data.content;
         } else {

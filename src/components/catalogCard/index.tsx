@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import favoriteActiveIcon from '../../assets/svg/favorite_active.svg';
+import favoriteActiveIcon from '@svg/favorite_active.svg';
 import favoriteDisabledIcon from '@svg/favorite.svg';
-import './catalogCard.scss';
+import './catalogCard.styles.scss';
 
 interface Price {
   value: number;

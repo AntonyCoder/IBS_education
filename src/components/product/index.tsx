@@ -5,25 +5,27 @@ import { fetchProduct } from "@slices/productSlice";
 import favoriteActiveIcon from '@svg/favorite_active.svg';
 import favoriteDisabledIcon from '@svg/favorite.svg';
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import './product.scss';
 import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
 import { AppDispatch } from "src/store";
+import './product.styles.scss';
 
 interface ProductType {
     id: string;
     name: string;
+    description: string;
     info: string;
     details: string;
-    price: {
-        value: number;
-        currency: string;
-    };
+    like: boolean;
     picture: {
         path: string;
         alt: string;
     };
-    like: boolean;
+    price: {
+        value: number;
+        currency: string;
+    };
+    
 }
 
 interface ProductState {
