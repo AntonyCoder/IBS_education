@@ -41,7 +41,7 @@ module.exports = {
         historyApiFallback: true,
     },
     resolve: {
-        extensions: ['.js', '.json', '.svg', '.jsx', '.scss', '.tsx', '.ts'],
+        extensions: ['.js', '.json', '.svg', '.jsx', '.scss', '.tsx', '.ts',],
         alias: {
             '@svg': path.resolve(__dirname, 'src/assets/svg'),
             '@api': path.resolve(__dirname, 'src/api'),
@@ -49,6 +49,7 @@ module.exports = {
             '@slices': path.resolve(__dirname, 'src/slices'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
+            '@enums': path.resolve(__dirname, 'src/enums')
         }
     },
     module: {

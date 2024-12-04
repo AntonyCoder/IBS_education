@@ -20,16 +20,28 @@ const errorSlice = createSlice({
     initialState,
     reducers: {
         addError: (state, action: PayloadAction<string>) => {
-            state.errorQueue.push(action.payload);
+            return{
+                ...state,
+                errorQueue: [...state.errorQueue, action.payload]
+            }
         },
         removeError: (state) => {
-            state.errorQueue.shift();
+            return{
+                ...state,
+                errorQueue: state.errorQueue.slice(1),
+            }
         },
         setCurrentError: (state, action: PayloadAction<string | null>) => {
-            state.currentError = action.payload;
+            return{
+                ...state,
+                currentError: action.payload,
+            }
         },
         clearCurrentError: (state) => {
-            state.currentError = null;
+            return{
+                ...state,
+                currentError: null,
+            }
         },
     },
 });

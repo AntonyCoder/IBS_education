@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CatalogItem from "../catalogCard";
 import './catalog.styles.scss';
+import { Status } from "@enums/status.enums";
 
 interface CatalogItemType {
     id: string;
@@ -21,12 +22,12 @@ interface CatalogState {
 const Catalog: React.FC = () => {
     const { filteredItems, status, error } = useSelector((state: { catalog: CatalogState }) => state.catalog);
 
-    if (status === 'loading') {
+    if (status === Status.Loading) {
         return <p>Загрузка...</p>;
     }
 
 
-    if (status === 'failed') {
+    if (status === Status.Failed) {
         return <p>Error: {error}</p>;
     }
 

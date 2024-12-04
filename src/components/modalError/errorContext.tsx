@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useContext, useEffect} from 'react';
+import React, { ReactNode, useEffect} from 'react';
 import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './index';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,16 +15,6 @@ interface ErrorProviderProps {
 
 interface ErrorContextType {
   showError: (message: string) => void;
-}
-
-const ErrorContext = createContext<ErrorContextType | undefined>(undefined);
-
-export const useError = (): ErrorContextType => {
-  const context = useContext(ErrorContext);
-  if(!context) {
-    throw new Error ('Ошибка useError');
-  }
-  return context;
 }
 
 export const ErrorProvider: React.FC<ErrorProviderProps> = ({ children }) => {
@@ -52,7 +42,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({ children }) => {
   };
 
   return (
-    <ErrorContext.Provider value={{ showError }}>
+    <>
       {children}
       {currentError && (
         <ErrorModal
@@ -62,6 +52,6 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({ children }) => {
           onClose={handleCloseModal}
         />
       )}
-    </ErrorContext.Provider>
+    </>
   );
 };
