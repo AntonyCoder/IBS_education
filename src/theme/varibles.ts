@@ -1,4 +1,4 @@
-export const colors = {
+const Colors = {
     primaryColor: '#323232',
     cardBackgroundColor: '#f2f2f2',
     secondaryColor: '#545454',
@@ -6,3 +6,5 @@ export const colors = {
     activeColorHover: '#e99330',
     white: '#ffffff',
 }
+
+export default Colors;

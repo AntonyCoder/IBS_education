@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import { colors } from './varibles';
+import Colors from './varibles';
 
 const breakpoints = {
     values: {
@@ -27,11 +27,11 @@ const theme = createTheme({
                     fontSize: '2.4rem',
                     transition: 'ease-in-out 0.2s',
                     cursor: 'pointer',
-                    backgroundColor: colors.activeColor,
-                    color: colors.white,
+                    backgroundColor: Colors.activeColor,
+                    color: Colors.white,
                     '&:hover': {
                         boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.25)',
-                        background: colors.activeColorHover,
+                        background: Colors.activeColorHover,
                     },
                     [`@media (max-width:${breakpoints.values.md}px)`]: {
                         order: '3',

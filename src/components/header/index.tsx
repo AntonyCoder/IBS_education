@@ -2,9 +2,10 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice";
 import setDebounce from "@utils/debounce";
-import shoppingCart from "@svg/shopping_cart.svg";
-import account from "@svg/account_circle.svg";
 import { AppDispatch } from "src/store";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Colors from "../../theme/varibles";
 import './header.styles.scss';
 
 interface CatalogState {
@@ -46,10 +47,18 @@ const Header: React.FC = () => {
             </div>
             <div className="header__icon-wrapper">
                 <a href="#" className="btn">
-                    <img src={shoppingCart} alt="shopping-cart" />
+                <ShoppingCartOutlinedIcon
+                        sx={{
+                            color: Colors.primaryColor,
+                            fontSize: "24px",
+                        }} />
                 </a>
                 <a href="#" className="btn">
-                    <img src={account} alt="account" />
+                    <AccountCircleOutlinedIcon
+                        sx={{
+                            color: Colors.primaryColor,
+                            fontSize: "24px",
+                        }} />
                 </a>
             </div>
         </header>
