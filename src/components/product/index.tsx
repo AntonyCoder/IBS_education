@@ -81,7 +81,7 @@ const Product: React.FC = () => {
                             <img src={addBtn} alt="add-btn" />
                         </button>
                     </div>
-                    <Button variant='contained'>Add to cart</Button>
+                    <Button variant='contained' className="add-btn">Add to cart</Button>
                     <img
                         className="favorite__icon-main"
                         src={product.like ? favoriteActiveIcon : favoriteDisabledIcon}

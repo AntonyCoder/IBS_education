@@ -5,7 +5,7 @@ import setDebounce from "@utils/debounce";
 import { AppDispatch } from "src/store";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Colors from "../../theme/varibles";
+import { Colors } from "@enums/colors.enums";
 import './header.styles.scss';
 
 interface CatalogState {
