@@ -9,6 +9,8 @@ import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
 import { AppDispatch } from "src/store";
 import './product.styles.scss';
+import { Status } from "@enums/status.enums";
+import { Button } from "@mui/material";
 
 interface ProductType {
     id: string;
@@ -25,12 +27,12 @@ interface ProductType {
         value: number;
         currency: string;
     };
-    
+
 }
 
 interface ProductState {
     product: ProductType | null;
-    status:  'idle' | 'loading' | 'succeeded' | 'failed';
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
 
@@ -41,16 +43,16 @@ const Product: React.FC = () => {
     const { product, status, error } = useSelector((state: { product: ProductState }) => state.product)
 
     useEffect(() => {
-        if(id) {
+        if (id) {
             dispatch(fetchProduct(id))
         }
     }, [id, dispatch]);
 
-     if (status === 'loading') return <p>Загрузка...</p>;
+    if (status === Status.Loading) return <p>Загрузка...</p>;
 
-     if (status === 'failed') return <p>Ошибка при загрузке данных: {error}</p>;
- 
-     if (!product) return <p>Товар не найден.</p>;
+    if (status === Status.Failed) return <p>Ошибка при загрузке данных: {error}</p>;
+
+    if (!product) return <p>Товар не найден.</p>;
 
     return (
         <div className="item-page">
@@ -79,7 +81,7 @@ const Product: React.FC = () => {
                             <img src={addBtn} alt="add-btn" />
                         </button>
                     </div>
-                    <button className="add-btn">Add to cart</button>
+                    <Button variant='contained'>Add to cart</Button>
                     <img
                         className="favorite__icon-main"
                         src={product.like ? favoriteActiveIcon : favoriteDisabledIcon}
