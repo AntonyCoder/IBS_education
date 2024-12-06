@@ -31,10 +31,6 @@
         margin: 31px 0 30px;
     }
 
-    &__favorite-icon {
-        margin: 8px 8px 8px auto;
-    }
-
     &-title {
         text-align: center;
         line-height: 2.5rem;
@@ -48,6 +44,15 @@
         font-size: 1.4rem;
         color: vars.$secondary-color;
     }
+}
+
+.favorite-icon-wrapper {
+    margin: 8px 8px 8px auto;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: vars.$primary-color;
 }
 
 /* Мобильная версия */

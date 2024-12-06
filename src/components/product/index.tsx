@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "@slices/productSlice";
-import favoriteActiveIcon from '@svg/favorite_active.svg';
-import favoriteDisabledIcon from '@svg/favorite.svg';
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
-import { AppDispatch } from "src/store";
+import { AppDispatch, RootState } from "src/store";
 import './product.styles.scss';
 import { Status } from "@enums/status.enums";
 import { Button } from "@mui/material";
+import { toggleFavorite } from "@slices/favoriteSlice";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Colors } from "@enums/colors.enums";
 
 interface ProductType {
     id: string;
@@ -40,7 +42,8 @@ const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch = useDispatch<AppDispatch>();
 
-    const { product, status, error } = useSelector((state: { product: ProductState }) => state.product)
+    const { product, status, error } = useSelector((state: { product: ProductState }) => state.product);
+    const favoriteIds = useSelector((state: RootState) => state.favorite.favoriteIds);
 
     useEffect(() => {
         if (id) {
@@ -49,10 +52,14 @@ const Product: React.FC = () => {
     }, [id, dispatch]);
 
     if (status === Status.Loading) return <p>Загрузка...</p>;
-
     if (status === Status.Failed) return <p>Ошибка при загрузке данных: {error}</p>;
-
     if (!product) return <p>Товар не найден.</p>;
+
+    const isFavorite = favoriteIds.includes(product.id);
+
+    const handleToggleFavorite = () => {
+        dispatch(toggleFavorite(product.id));
+    }
 
     return (
         <div className="item-page">
@@ -82,11 +89,19 @@ const Product: React.FC = () => {
                         </button>
                     </div>
                     <Button variant='contained' className="add-btn">Add to cart</Button>
-                    <img
-                        className="favorite__icon-main"
-                        src={product.like ? favoriteActiveIcon : favoriteDisabledIcon}
-                        alt="favorite"
-                    />
+                    <div onClick={handleToggleFavorite} className="favorite__icon-wrapper" style={{ cursor: 'pointer' }}>
+                        {isFavorite ? (
+                            <FavoriteIcon sx={{
+                                color: Colors.activeColor,
+                                fontSize: '24px'
+                            }} />
+                        ) : (
+                            <FavoriteBorderIcon sx={{
+                                color: Colors.secondaryColor,
+                                fontSize: '24px',
+                            }} />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
