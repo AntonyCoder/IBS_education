@@ -1,36 +1,16 @@
 'use strict'
 import apiClient from "./apiClient";
-
-interface CatalogItem {
-    id: string;
-    name: string;
-    info: string;
-    details: string;
-    price: {
-        value: number;
-        currency: string;
-    };
-    picture: {
-        path: string;
-        alt: string;
-    };
-    [key: string]: any;
-}
-
-interface ProductDetails extends CatalogItem {
-    info: string;
-    details: string;
-    like: boolean;
-}
+import { ICatalogItem } from "@slices/catalogSlice/catalogTypes";
+import { IProduct } from "@slices/productSlice/productTypes";
 
 interface ApiResponse<T> {
     content?: T;
 }
 
 //Запрос на получение списка товаров
-export default async function fetchCatalogListData(): Promise<CatalogItem[]> {
+export default async function fetchCatalogListData(): Promise<ICatalogItem[]> {
     try {
-        const response = await apiClient.get<{ content: CatalogItem[] }>(`item/`);
+        const response = await apiClient.get<{ content: ICatalogItem[] }>(`item/`);
         if (response.data?.content) {
             return response.data.content;
         } else {
@@ -43,9 +23,9 @@ export default async function fetchCatalogListData(): Promise<CatalogItem[]> {
 }
 
 //Запрос на получение одного товара
-export async function fetchProductData(itemId: string): Promise<ProductDetails | undefined> {
+export async function fetchProductData(itemId: string): Promise<IProduct | undefined> {
     try {
-        const response = await apiClient.get<ApiResponse<ProductDetails>>(`item/${itemId}`);
+        const response = await apiClient.get<ApiResponse<IProduct>>(`item/${itemId}`);
         if (response.data?.content) {
             return response.data.content;
         } else {

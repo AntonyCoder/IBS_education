@@ -1,44 +1,21 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "@slices/productSlice";
+import { fetchProduct } from "@slices/productSlice/productSlice";
 import favoriteActiveIcon from '@svg/favorite_active.svg';
 import favoriteDisabledIcon from '@svg/favorite.svg';
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
 import { AppDispatch } from "src/store";
+import { IProductState } from "@slices/productSlice/productTypes";
 import './product.styles.scss';
-
-interface ProductType {
-    id: string;
-    name: string;
-    description: string;
-    info: string;
-    details: string;
-    like: boolean;
-    picture: {
-        path: string;
-        alt: string;
-    };
-    price: {
-        value: number;
-        currency: string;
-    };
-    
-}
-
-interface ProductState {
-    product: ProductType | null;
-    status:  'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-}
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch = useDispatch<AppDispatch>();
 
-    const { product, status, error } = useSelector((state: { product: ProductState }) => state.product)
+    const { product, status, error } = useSelector((state: { product: IProductState }) => state.product)
 
     useEffect(() => {
         if(id) {

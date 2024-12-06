@@ -1,28 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import fetchCatalogListData from '@api/api';
+import { ICatalogItem, ICatalogState } from "./catalogTypes";
 
-interface CatalogItem {
-    id: string;
-    name: string;
-    [key: string]: any;
-}
-
-interface CatalogState {
-    items: CatalogItem[];
-    filteredItems: CatalogItem[];
-    loading: boolean;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error?: string;
-}
-
-const initialState: CatalogState = {
+const initialState: ICatalogState = {
     items: [],
     filteredItems: [],
     loading: false,
     status: 'idle',
 }
 
-export const fetchCatalog = createAsyncThunk<CatalogItem[], void, { rejectValue: string }>(
+export const fetchCatalog = createAsyncThunk<ICatalogItem[], void, { rejectValue: string }>(
     'catalog/fetchCatalog',
     async (_, { rejectWithValue }) => {
         try {
@@ -52,7 +39,7 @@ const catalogSlice = createSlice({
                 state.loading = true;
                 state.error = undefined;
             })
-            .addCase(fetchCatalog.fulfilled, (state, action: PayloadAction<CatalogItem[]>) => {
+            .addCase(fetchCatalog.fulfilled, (state, action: PayloadAction<ICatalogItem[]>) => {
                 state.status = 'succeeded';
                 state.items = action.payload;
                 state.filteredItems = action.payload;

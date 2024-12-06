@@ -1,13 +1,8 @@
 import React from 'react';
+import { IErrorModalProps } from '@slices/errorSlice/errorTypes';
 import './errorModal.styles.scss'; 
 
-interface ErrorModalProps {
-  isOpen: boolean;
-  message: string;
-  onClose: () => void;
-}
-
-const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, message, onClose }) => {
+const ErrorModal: React.FC<IErrorModalProps> = ({ isOpen, message, onClose }) => {
   if (!isOpen) return null;
 
   return (

@@ -1,26 +1,14 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchProductData } from '@api/api';
+import { IProduct, IProductState } from "./productTypes";
 
-interface Product {
-    id: string;
-    name: string;
-    info: string;
-    [key: string]: any;
-}
-
-interface ProductState {
-    product: Product | null;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-}
-
-const initialState: ProductState = {
+const initialState: IProductState = {
     product: null,
     status: 'idle',
     error: null,
 }
 
-export const fetchProduct = createAsyncThunk<Product, string>(
+export const fetchProduct = createAsyncThunk<IProduct, string>(
     'product/fetchProduct',
     async (id: string) => {
         const response = await fetchProductData(id);
@@ -40,7 +28,7 @@ const productSlice = createSlice({
             .addCase(fetchProduct.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchProduct.fulfilled, (state, action: PayloadAction<Product>) => {
+            .addCase(fetchProduct.fulfilled, (state, action: PayloadAction<IProduct>) => {
                 state.status = 'succeeded';
                 state.product = action.payload;
             })
