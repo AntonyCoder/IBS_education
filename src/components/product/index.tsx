@@ -6,13 +6,14 @@ import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
 import { AppDispatch, RootState } from "src/store";
-import './product.styles.scss';
 import { Status } from "@enums/status.enums";
 import { Button } from "@mui/material";
 import { toggleFavorite } from "@slices/favoriteSlice";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Colors } from "@enums/colors.enums";
+import './product.styles.scss';
+import Quantity from "@components/quantity";
 
 interface ProductType {
     id: string;
@@ -79,7 +80,7 @@ const Product: React.FC = () => {
                     <span className="item__price-main">
                         {product.price.value} {product.price.currency}
                     </span>
-                    <div className="quantity-wrapper">
+                    {/* <div className="quantity-wrapper">
                         <button className="control">
                             <img src={removeBtn} alt="remove-btn" />
                         </button>
@@ -87,7 +88,8 @@ const Product: React.FC = () => {
                         <button className="control">
                             <img src={addBtn} alt="add-btn" />
                         </button>
-                    </div>
+                    </div> */}
+                    <Quantity />
                     <Button variant='contained' className="add-btn">Add to cart</Button>
                     <div onClick={handleToggleFavorite} className="favorite__icon-wrapper" style={{ cursor: 'pointer' }}>
                         {isFavorite ? (
@@ -97,7 +99,7 @@ const Product: React.FC = () => {
                             }} />
                         ) : (
                             <FavoriteBorderIcon sx={{
-                                color: Colors.secondaryColor,
+                                color: Colors.iconBorder,
                                 fontSize: '24px',
                             }} />
                         )}

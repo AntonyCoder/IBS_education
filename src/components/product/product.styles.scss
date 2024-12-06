@@ -50,37 +50,6 @@
     margin-right: 16px;
 }
 
-.quantity-wrapper {
-    display: flex;
-}
-
-.control {
-    cursor: pointer;
-    border: 1px solid vars.$primary-color;
-    width: 4rem;
-    height: 4rem;
-    background-color: vars.$white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.quantity {
-    border: none;
-    box-sizing: border-box;
-    padding: 0;
-    width: 10rem;
-    height: 4rem;
-    border-top: 1px solid vars.$primary-color;
-    border-bottom: 1px solid vars.$primary-color;
-    text-align: center;
-    font-size: 2.4rem;
-}
-
-.quantity:focus {
-    outline: none;
-}
-
 .add-btn {
     text-transform: none;
     padding: 0;

@@ -3,6 +3,7 @@ import catalogReducer from '@slices/catalogSlice';
 import productReducer from '@slices/productSlice';
 import errorReducer from '@slices/errorSlice';
 import favoriteSlice from '@slices/favoriteSlice';
+import quantitySlice from '@slices/quantitySlice';
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         product: productReducer,
         error: errorReducer,
         favorite: favoriteSlice,
+        quantity: quantitySlice,
     },
 });
 

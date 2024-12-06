@@ -58,7 +58,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
             }}/>
           ) : (
             <FavoriteBorderIcon sx={{
-              color: Colors.secondaryColor,
+              color: Colors.iconBorder,
               fontSize: '24px',
             }} />
           )}

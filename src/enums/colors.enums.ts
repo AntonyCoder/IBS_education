@@ -5,4 +5,5 @@ export enum Colors {
     activeColor = '#e97f03',
     activeColorHover = '#e99330',
     white = '#ffffff',
+    iconBorder = '#959595',
 }
