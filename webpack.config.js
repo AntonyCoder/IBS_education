@@ -25,7 +25,7 @@ const optimization = () => {
 }
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -41,7 +41,7 @@ module.exports = {
         historyApiFallback: true,
     },
     resolve: {
-        extensions: ['.js', '.json', '.svg', '.jsx', '.scss'],
+        extensions: ['.js', '.json', '.svg', '.jsx', '.scss', '.tsx', '.ts',],
         alias: {
             '@svg': path.resolve(__dirname, 'src/assets/svg'),
             '@api': path.resolve(__dirname, 'src/api'),
@@ -49,7 +49,7 @@ module.exports = {
             '@slices': path.resolve(__dirname, 'src/slices'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@helpers': path.resolve(__dirname, 'src/helpers'),
-            '@const': path.resolve(__dirname, 'src/constants'),
+            '@enums': path.resolve(__dirname, 'src/enums'),
             '@header': path.resolve(__dirname, 'src/components/header'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),
@@ -58,6 +58,11 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+              },
             {
                 test: /\.html$/,
                 use: ['html-loader'],
@@ -79,8 +84,8 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
                 use: 'babel-loader',
+                exclude: /node_modules/,
             },
         ],
     },

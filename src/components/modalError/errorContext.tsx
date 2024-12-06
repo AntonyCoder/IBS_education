@@ -1,15 +1,19 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { setErrorCallback } from '@helpers/errorService';
-import ErrorModal from './errorModal';
+import ErrorModal from './index';
 import { useDispatch, useSelector } from 'react-redux';
-import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice';
+import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice/errorSlice';
+import { IErrorState} from '@slices/errorSlice/types';
+import { IErrorProviderProps } from './types';
 
-export const ErrorProvider = ({ children }) => {
+export const ErrorProvider: React.FC<IErrorProviderProps> = ({ children }) => {
   const dispatch = useDispatch();
-  const { errorQueue, currentError } = useSelector((state) => state.error);
 
-  const showError = (message) => {
-    dispatch(addError(message));
+  const { errorQueue, currentError } = useSelector((state: { error: IErrorState }) => state.error);
+
+  const showError = (message: string) => {
+    const error = new Error(message);
+    dispatch(addError(error));
   }
 
   useEffect(() => {
@@ -32,8 +36,8 @@ export const ErrorProvider = ({ children }) => {
       {children}
       {currentError && (
         <ErrorModal
-          key={currentError}
-          message={currentError}
+          key={currentError.message}
+          message={currentError.message}
           isOpen={!!currentError}
           onClose={handleCloseModal}
         />

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import DesctopRouter from "./routes/desctopRouter";
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <Provider store={store}>
             <ErrorProvider>

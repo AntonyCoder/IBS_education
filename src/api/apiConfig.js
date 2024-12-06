@@ -1,1 +1,0 @@
-export const LOCAL_SERVER_URL = process.env.LOCAL_SERVER_URL;

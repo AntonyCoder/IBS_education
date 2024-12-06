@@ -1,9 +1,8 @@
 import React from "react";
-import Product from '@components/product/product';
+import Product from '@components/product/index';
 import MainLayout from "@layouts/mainLayout";
 
-
-const ProductPage = () => {
+const ProductPage: React.FC = () => {
     return (
         <MainLayout>
             <Product />

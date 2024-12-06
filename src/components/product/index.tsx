@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "@slices/productSlice";
-import favoriteActiveIcon from '@svg/favorite_active';
-import favoriteDisabledIcon from '@svg/favorite';
+import { fetchProduct } from "@slices/productSlice/productSlice";
+import favoriteActiveIcon from '@svg/favorite_active.svg';
+import favoriteDisabledIcon from '@svg/favorite.svg';
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import './product.scss';
-import removeBtn from '@svg/remove_btn';
-import addBtn from '@svg/add_btn';
+import removeBtn from '@svg/remove_btn.svg';
+import addBtn from '@svg/add_btn.svg';
+import { AppDispatch } from "src/store";
+import { IProductState } from "@slices/productSlice/types";
+import './product.styles.scss';
 
-const Product = () => {
-    const { id } = useParams();
-    const dispatch = useDispatch();
+const Product: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const dispatch = useDispatch<AppDispatch>();
 
-    const { product, status, error } = useSelector((state) => state.product)
+    const { product, status, error } = useSelector((state: { product: IProductState }) => state.product)
 
     useEffect(() => {
-       dispatch(fetchProduct(id))
+        if(id) {
+            dispatch(fetchProduct(id))
+        }
     }, [id, dispatch]);
 
      if (status === 'loading') return <p>Загрузка...</p>;

@@ -1,32 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IErrorState } from "./types";
+
+
+const initialState: IErrorState = {
+    errorQueue: [],
+    currentError: null,
+}
 
 const errorSlice = createSlice({
     name: 'error',
-    initialState: {
-        errorQueue: [],
-        currentError: null,
-    },
+    initialState,
     reducers: {
-        addError: (state, action) => {
-            return{
+        addError: (state, action: PayloadAction<Error>) => {
+            return {
                 ...state,
                 errorQueue: [...state.errorQueue, action.payload]
             }
         },
         removeError: (state) => {
-            return{
+            return {
                 ...state,
                 errorQueue: state.errorQueue.slice(1),
             }
         },
-        setCurrentError: (state, action) => {
-            return{
+        setCurrentError: (state, action: PayloadAction<Error | null>) => {
+            return {
                 ...state,
                 currentError: action.payload,
             }
         },
         clearCurrentError: (state) => {
-            return{
+            return {
                 ...state,
                 currentError: null,
             }
