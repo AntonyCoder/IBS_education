@@ -5,7 +5,7 @@ import setDebounce from "@utils/debounce";
 import shoppingCart from "@svg/shopping_cart.svg";
 import account from "@svg/account_circle.svg";
 import { AppDispatch } from "src/store";
-import { ICatalogState } from "@slices/catalogSlice/catalogTypes";
+import { ICatalogState } from "@slices/catalogSlice/types";
 import './header.styles.scss';
 
 const Header: React.FC = () => {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import favoriteActiveIcon from '@svg/favorite_active.svg';
 import favoriteDisabledIcon from '@svg/favorite.svg';
-import { ICatalogItemProps } from "@slices/catalogSlice/catalogTypes";
+import { ICatalogItemProps } from "./types";
 import './catalogCard.styles.scss';
 
 const CatalogItem: React.FC<ICatalogItemProps> = ({ item }) => {

@@ -1,7 +1,7 @@
 'use strict'
 import apiClient from "./apiClient";
-import { ICatalogItem } from "@slices/catalogSlice/catalogTypes";
-import { IProduct } from "@slices/productSlice/productTypes";
+import { ICatalogItem } from "@slices/catalogSlice/types";
+import { IProduct } from "@slices/productSlice/types";
 
 interface ApiResponse<T> {
     content?: T;

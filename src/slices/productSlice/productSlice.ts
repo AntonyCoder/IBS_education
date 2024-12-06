@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchProductData } from '@api/api';
-import { IProduct, IProductState } from "./productTypes";
+import { IProduct, IProductState } from "./types";
 
 const initialState: IProductState = {
     product: null,

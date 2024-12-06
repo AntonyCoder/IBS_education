@@ -1,5 +1,5 @@
 import React from 'react';
-import { IErrorModalProps } from '@slices/errorSlice/errorTypes';
+import { IErrorModalProps } from './types';
 import './errorModal.styles.scss'; 
 
 const ErrorModal: React.FC<IErrorModalProps> = ({ isOpen, message, onClose }) => {

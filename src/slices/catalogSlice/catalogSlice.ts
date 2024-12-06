@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import fetchCatalogListData from '@api/api';
-import { ICatalogItem, ICatalogState } from "./catalogTypes";
+import { ICatalogItem, ICatalogState } from "./types";
 
 const initialState: ICatalogState = {
     items: [],

@@ -8,7 +8,7 @@ import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import removeBtn from '@svg/remove_btn.svg';
 import addBtn from '@svg/add_btn.svg';
 import { AppDispatch } from "src/store";
-import { IProductState } from "@slices/productSlice/productTypes";
+import { IProductState } from "@slices/productSlice/types";
 import './product.styles.scss';
 
 const Product: React.FC = () => {

@@ -13,7 +13,3 @@ export interface ICatalogState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error?: string;
 }
-
-export interface ICatalogItemProps {
-    item: ICatalogItem;
-  }

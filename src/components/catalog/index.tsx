@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CatalogItem from "@components/catalogCard/index";
-import { ICatalogState } from "@slices/catalogSlice/catalogTypes";
+import { ICatalogState } from "@slices/catalogSlice/types";
 import { Status } from "@enums/status.enums";
 import './catalog.styles.scss';
 

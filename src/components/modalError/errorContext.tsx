@@ -3,7 +3,8 @@ import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice/errorSlice';
-import { IErrorState, IErrorProviderProps } from '@slices/errorSlice/errorTypes';
+import { IErrorState} from '@slices/errorSlice/types';
+import { IErrorProviderProps } from './types';
 
 export const ErrorProvider: React.FC<IErrorProviderProps> = ({ children }) => {
   const dispatch = useDispatch();

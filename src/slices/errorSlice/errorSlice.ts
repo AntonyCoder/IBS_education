@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IErrorState } from "./errorTypes";
+import { IErrorState } from "./types";
 
 
 const initialState: IErrorState = {
