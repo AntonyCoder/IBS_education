@@ -1,26 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CatalogItem from "@components/catalogCard/index";
-import './catalog.styles.scss';
+import { ICatalogState } from "@slices/catalogSlice/types";
 import { Status } from "@enums/status.enums";
-
-interface CatalogItemType {
-    id: string;
-    name: string;
-    price: { value: number; currency: string };
-    picture: { path: string; alt: string };
-    like: boolean;
-}
-
-interface CatalogState {
-    filteredItems: CatalogItemType[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-}
-
+import './catalog.styles.scss';
 
 const Catalog: React.FC = () => {
-    const { filteredItems, status, error } = useSelector((state: { catalog: CatalogState }) => state.catalog);
+    const { filteredItems, status, error } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
 
     if (status === Status.Loading) {
         return <p>Загрузка...</p>;

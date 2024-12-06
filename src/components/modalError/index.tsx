@@ -8,12 +8,8 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-
-interface ErrorModalProps {
-  isOpen: boolean;
-  message: string;
-  onClose: () => void;
-}
+import { IErrorModalProps } from './types';
+import './errorModal.styles.scss'; 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -25,7 +21,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, message, onClose }) => {
+
+const ErrorModal: React.FC<IErrorModalProps> = ({ isOpen, message, onClose }) => {
   if (!isOpen) return null;
 
   return (

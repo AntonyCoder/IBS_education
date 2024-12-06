@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "@slices/productSlice";
+import { fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import removeBtn from '@svg/remove_btn.svg';
-import addBtn from '@svg/add_btn.svg';
 import { AppDispatch, RootState } from "src/store";
 import { Status } from "@enums/status.enums";
 import { Button } from "@mui/material";
@@ -12,38 +10,16 @@ import { toggleFavorite } from "@slices/favoriteSlice";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Colors } from "@enums/colors.enums";
-import './product.styles.scss';
 import Quantity from "@components/quantity";
-
-interface ProductType {
-    id: string;
-    name: string;
-    description: string;
-    info: string;
-    details: string;
-    like: boolean;
-    picture: {
-        path: string;
-        alt: string;
-    };
-    price: {
-        value: number;
-        currency: string;
-    };
-
-}
-
-interface ProductState {
-    product: ProductType | null;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-}
+import { IProductState } from "@slices/productSlice/types";
+import './product.styles.scss';
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch = useDispatch<AppDispatch>();
 
-    const { product, status, error } = useSelector((state: { product: ProductState }) => state.product);
+
+    const { product, status, error } = useSelector((state: { product: IProductState }) => state.product);
     const favoriteIds = useSelector((state: RootState) => state.favorite.favoriteIds);
 
     useEffect(() => {
@@ -80,15 +56,6 @@ const Product: React.FC = () => {
                     <span className="item__price-main">
                         {product.price.value} {product.price.currency}
                     </span>
-                    {/* <div className="quantity-wrapper">
-                        <button className="control">
-                            <img src={removeBtn} alt="remove-btn" />
-                        </button>
-                        <input className="quantity" type="text" defaultValue={1} />
-                        <button className="control">
-                            <img src={addBtn} alt="add-btn" />
-                        </button>
-                    </div> */}
                     <Quantity />
                     <Button variant='contained' className="add-btn">Add to cart</Button>
                     <div onClick={handleToggleFavorite} className="favorite__icon-wrapper" style={{ cursor: 'pointer' }}>

@@ -7,31 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Colors } from "@enums/colors.enums";
+import { ICatalogItemProps } from "./types";
 import './catalogCard.styles.scss';
 
-interface Price {
-  value: number;
-  currency: string;
-}
-
-interface Picture {
-  path: string;
-  alt: string;
-}
-
-interface CatalogItemType {
-  id: string;
-  name: string;
-  picture: Picture;
-  price: Price;
-}
-
-interface CatalogItemProps {
-  item: CatalogItemType;
-}
-
-
-const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
+const CatalogItem: React.FC<ICatalogItemProps> = ({ item }) => {
   const dispatch = useDispatch();
 
   const favoriteIds = useSelector((state: RootState) => state.favorite.favoriteIds)

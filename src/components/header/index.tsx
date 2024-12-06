@@ -1,22 +1,19 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCatalog, filterItems } from "@slices/catalogSlice";
+import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
 import setDebounce from "@utils/debounce";
 import { AppDispatch } from "src/store";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Colors } from "@enums/colors.enums";
+import { ICatalogState } from "@slices/catalogSlice/types";
 import './header.styles.scss';
-
-interface CatalogState {
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-}
 
 const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [searchQuery, setSearchQuery] = useState<string>('');
 
-    const { status } = useSelector((state: { catalog: CatalogState }) => state.catalog);
+    const { status } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
 
     useEffect(() => {
         if (status === 'idle') {
