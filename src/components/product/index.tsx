@@ -6,11 +6,11 @@ import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { AppDispatch, RootState } from "src/store";
 import { Status } from "@enums/status.enums";
 import { Button } from "@mui/material";
-import { toggleFavorite } from "@slices/favoriteSlice";
+import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Colors } from "@enums/colors.enums";
-import Quantity from "@components/quantity";
+import Quantity from "@components/product/quantity";
 import { IProductState } from "@slices/productSlice/types";
 import './product.styles.scss';
 

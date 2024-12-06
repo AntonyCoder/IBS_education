@@ -1,46 +1,16 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
-import setDebounce from "@utils/debounce";
-import { AppDispatch } from "src/store";
+import React from "react";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Colors } from "@enums/colors.enums";
-import { ICatalogState } from "@slices/catalogSlice/types";
+import Search from "@header/search";
 import './header.styles.scss';
 
 const Header: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const [searchQuery, setSearchQuery] = useState<string>('');
-
-    const { status } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
-
-    useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchCatalog());
-        }
-    }, [status, dispatch]);
-
-    const handleSearch = setDebounce((query: string) => {
-        dispatch(filterItems(query));
-    }, 1000);
-
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const query = event.target.value;
-        setSearchQuery(query);
-        handleSearch(query);
-    };
-
+    
     return (
         <header className="header">
             <div className="header__search-wrapper">
-                <input
-                    type="search"
-                    className="search-field"
-                    placeholder="Search products"
-                    value={searchQuery}
-                    onChange={handleInputChange}
-                />
+                <Search />
             </div>
             <div className="header__icon-wrapper">
                 <a href="#" className="btn">

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { RootState } from "src/store";
-import { toggleFavorite } from "@slices/favoriteSlice";
+import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

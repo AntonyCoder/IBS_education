@@ -2,16 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 import catalogReducer from '@slices/catalogSlice/catalogSlice';
 import productReducer from '@slices/productSlice/productSlice';
 import errorReducer from '@slices/errorSlice/errorSlice';
-import favoriteSlice from '@slices/favoriteSlice';
-import quantitySlice from '@slices/quantitySlice';
+import favoriteReducer from '@slices/favoriteSlice/favoriteSlice';
+import quantityReducer from '@slices/quantitySlice/quantitySlice';
 
 const store = configureStore({
     reducer: {
         catalog: catalogReducer,
         product: productReducer,
         error: errorReducer,
-        favorite: favoriteSlice,
-        quantity: quantitySlice,
+        favorite: favoriteReducer,
+        quantity: quantityReducer,
     },
 });
 

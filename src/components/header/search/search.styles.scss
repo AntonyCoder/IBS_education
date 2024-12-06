@@ -1,0 +1,38 @@
+@use '@styles/variables' as vars;
+
+.search-field {
+    border: none;
+    border-bottom: 2px solid vars.$white;
+    width: 30rem;
+    height: 4rem;
+    font-size: 1.4rem;
+
+    &::before {
+        content: none
+    }
+
+    &::after {
+        border-bottom: 2px solid vars.$active-color;
+    }
+
+    &:focus {
+        outline: none;
+        border-bottom: 2px solid vars.$active-color;
+    }
+
+    &:focus-within .search-icon {
+        color: vars.$active-color;
+    }
+}
+
+.search-icon {
+    font-size: 24px;
+    color: vars.$primary-color;
+    padding-left: 3px;
+}
+
+@media(max-width: 870px){
+    .search-field{
+        width: 20rem;
+    }
+}

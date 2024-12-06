@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/store";
-import { decrement, increment, setQuantity } from "@slices/quantitySlice";
+import { decrement, increment, setQuantity } from "@slices/quantitySlice/quantitySlice";
 import { Box, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";

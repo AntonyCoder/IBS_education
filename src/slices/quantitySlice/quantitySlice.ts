@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IQuantityState } from "./types";
 
-interface IQuantityState {
-    value: number;
-}
 
 const initialState: IQuantityState = {
     value: 1,

@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IFavoritesState } from "./types";
 
-interface FavoritesState {
-    favoriteIds: string[];
-}
-
-const initialState: FavoritesState = {
+const initialState: IFavoritesState = {
     favoriteIds: [],
 }
 
