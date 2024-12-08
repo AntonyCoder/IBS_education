@@ -1,0 +1,24 @@
+import styled from "styled-components";
+
+const mobileBreakpoint = '870px';
+
+export const CatalogWrapper = styled('section')(
+    () =>
+    ({
+        padding: '0 16px',
+    })
+)
+
+export const CatalogItems = styled('div')(
+    () =>
+    ({
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+
+        [`@media (max-width: ${mobileBreakpoint})`]: {
+            padding: '0 1.55rem',
+        }
+    })
+)
