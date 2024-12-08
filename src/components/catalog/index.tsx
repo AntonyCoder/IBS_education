@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import CatalogItem from "@components/catalogCard/index";
 import { ICatalogState } from "@slices/catalogSlice/types";
 import { Status } from "@enums/status.enums";
-import './catalog.styles.scss';
+import { CatalogWrapper, CatalogItems } from "./catalog.styled";
 
 const Catalog: React.FC = () => {
     const { filteredItems, status, error } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
@@ -25,13 +25,13 @@ const Catalog: React.FC = () => {
     }
 
     return (
-        <section className="catalog">
-            <div className="catalog-items">
+        <CatalogWrapper>
+            <CatalogItems>
                 {filteredItems.map((item) => (
                     <CatalogItem key={item.id} item={item} />
                 ))}
-            </div>
-        </section>
+            </CatalogItems>
+        </CatalogWrapper>
     );
 };
 

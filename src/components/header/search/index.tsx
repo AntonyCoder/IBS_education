@@ -1,12 +1,11 @@
-import { Input, InputAdornment } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
 import setDebounce from "@utils/debounce";
 import { ICatalogState } from "@slices/catalogSlice/types";
 import { AppDispatch } from "src/store";
-import SearchIcon from '@mui/icons-material/Search';
-import './search.styles.scss';
+import { StyledInput, StyledSearchIcon } from "./search.styled";
 
 const Search: React.FC = () => {
 
@@ -32,15 +31,14 @@ const Search: React.FC = () => {
     };
 
     return (
-        <Input
+        <StyledInput
             type="search"
-            className="search-field"
             placeholder="Search products"
             value={searchQuery}
             onChange={handleInputChange}
             startAdornment={
                 <InputAdornment position="start">
-                    <SearchIcon className="search-icon"/>
+                    <StyledSearchIcon />
                 </InputAdornment>
             } />
     )

@@ -1,14 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { RootState } from "src/store";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
 import { useDispatch, useSelector } from "react-redux";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Colors } from "@enums/colors.enums";
 import { ICatalogItemProps } from "./types";
-import './catalogCard.styles.scss';
+import {
+  ItemWrapper,
+  ItemLink,
+  FavoriteIconWrapper,
+  StyledFavoriteIcon,
+  StyledFavoriteBorderIcon,
+  ItemImage,
+  ItemTitle,
+  ItemPrice
+} from "./catalogCard.styled";
 
 const CatalogItem: React.FC<ICatalogItemProps> = ({ item }) => {
   const dispatch = useDispatch();
@@ -23,36 +28,20 @@ const CatalogItem: React.FC<ICatalogItemProps> = ({ item }) => {
   };
 
   return (
-    <div className="item">
-      <Link to={`/product/${item.id}`} className="item-link">
-        <div
-          onClick={handleToggleFavorite}
-          className="favorite-icon-wrapper"
-          style={{ cursor: "pointer" }}
-        >
-          {isFavorite ? (
-            <FavoriteIcon sx={{
-              color: Colors.activeColor,
-              fontSize: '24px'
-            }}/>
-          ) : (
-            <FavoriteBorderIcon sx={{
-              color: Colors.iconBorder,
-              fontSize: '24px',
-            }} />
-          )}
-        </div>
-        <img
+    <ItemWrapper>
+      <ItemLink to={`/product/${item.id}`}>
+        <FavoriteIconWrapper onClick={handleToggleFavorite}>
+          {isFavorite ? <StyledFavoriteIcon /> : <StyledFavoriteBorderIcon />}
+        </FavoriteIconWrapper>
+        <ItemImage
           src={`${LOCAL_SERVER_URL}${item.picture.path}`}
-          alt={item.picture.alt}
-          className="item-image"
-        />
-        <span className="item-title">{item.name}</span>
-        <span className="item-price">
-          {item.price.value} {item.price.currency}
-        </span>
-      </Link>
-    </div>
+          alt={item.picture.alt} />
+          <ItemTitle>{item.name}</ItemTitle>
+          <ItemPrice>
+            {item.price.value} {item.price.currency}
+          </ItemPrice>
+      </ItemLink>
+    </ItemWrapper>
   );
 };
 

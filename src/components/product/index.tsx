@@ -5,14 +5,24 @@ import { fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { AppDispatch, RootState } from "src/store";
 import { Status } from "@enums/status.enums";
-import { Button } from "@mui/material";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Colors } from "@enums/colors.enums";
 import Quantity from "@components/product/quantity";
 import { IProductState } from "@slices/productSlice/types";
-import './product.styles.scss';
+import {
+    ItemPage,
+    ImageWrapper,
+    ItemImage,
+    ItemInformation,
+    ItemTitle,
+    ItemDescription,
+    ItemDetails,
+    PurchaseWrapper,
+    ItemPrice,
+    AddButton,
+    FavoriteIconWrapper,
+    StyledFavoriteIcon,
+    StyledFavoriteBorderIcon
+} from "./product.styled";
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -39,41 +49,30 @@ const Product: React.FC = () => {
     }
 
     return (
-        <div className="item-page">
-            <div className="image-wrapper">
-                <img
-                    className="item__image-main"
+        <ItemPage>
+            <ImageWrapper>
+                <ItemImage
                     src={`${LOCAL_SERVER_URL}${product.picture.path}`}
-                    alt={product.picture.alt}
-                />
-            </div>
-            <div className="item-information">
-                <h1 className="item__title-main">{product.name}</h1>
-                <p className="item-description">{product.info}</p>
-                <span className="item-details">Details</span>
-                <p className="item-description">{product.details}</p>
-                <div className="purchase-wrapper">
-                    <span className="item__price-main">
+                    alt={product.picture.alt} />
+            </ImageWrapper>
+            <ItemInformation>
+                <ItemTitle>{product.name}</ItemTitle>
+                <ItemDescription>{product.info}</ItemDescription>
+                <ItemDetails>Details</ItemDetails>
+                <ItemDescription>{product.details}</ItemDescription>
+                <PurchaseWrapper>
+                    <ItemPrice>
                         {product.price.value} {product.price.currency}
-                    </span>
+                    </ItemPrice>
                     <Quantity />
-                    <Button variant='contained' className="add-btn">Add to cart</Button>
-                    <div onClick={handleToggleFavorite} className="favorite__icon-wrapper" style={{ cursor: 'pointer' }}>
-                        {isFavorite ? (
-                            <FavoriteIcon sx={{
-                                color: Colors.activeColor,
-                                fontSize: '24px'
-                            }} />
-                        ) : (
-                            <FavoriteBorderIcon sx={{
-                                color: Colors.iconBorder,
-                                fontSize: '24px',
-                            }} />
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <AddButton variant="contained">Add to cart</AddButton>
+                    <FavoriteIconWrapper
+                        onClick={handleToggleFavorite}>
+                        {isFavorite ? <StyledFavoriteIcon/> : <StyledFavoriteBorderIcon/>}
+                    </FavoriteIconWrapper>
+                </PurchaseWrapper>
+            </ItemInformation>
+        </ItemPage>
     );
 };
 

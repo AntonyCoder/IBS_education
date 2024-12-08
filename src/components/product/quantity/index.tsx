@@ -2,10 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/store";
 import { decrement, increment, setQuantity } from "@slices/quantitySlice/quantitySlice";
-import { Box, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import './quantity.styles.scss'
+import {
+    QuantityWrapper,
+    StyledIconButton,
+    StyledTextField,
+} from "./quantity.styled";
 
 const Quantity: React.FC = () => {
     const quantity = useSelector((state: RootState) => state.quantity.value);
@@ -21,24 +24,22 @@ const Quantity: React.FC = () => {
     };
 
     return (
-        <Box
-            className='quantity-wrapper'>
-            <IconButton
+        <QuantityWrapper>
+            <StyledIconButton
                 onClick={handleDecrement}
-                className="control">
-                <RemoveIcon/>
-            </IconButton>
-            <TextField
-                className="quantity"
+            >
+                <RemoveIcon />
+            </StyledIconButton>
+            <StyledTextField
                 value={quantity}
                 onChange={handleChange}
             />
-            <IconButton
+            <StyledIconButton
                 onClick={handleIncrement}
-                className="control">
+            >
                 <AddIcon />
-            </IconButton>
-        </Box>
+            </StyledIconButton >
+        </QuantityWrapper >
     )
 }
 
