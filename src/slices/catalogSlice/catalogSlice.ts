@@ -26,6 +26,9 @@ const catalogSlice = createSlice({
     name: 'catalog',
     initialState,
     reducers: {
+        setSearchQuery(state, action: PayloadAction<string>) {
+            state.searchQuery = action.payload;
+        },
         filterItems(state, action: PayloadAction<string>) {
             const query = action.payload.toLowerCase();
             state.filteredItems = state.items.filter((item) =>
@@ -54,6 +57,6 @@ const catalogSlice = createSlice({
     },
 });
 
-export const { filterItems } = catalogSlice.actions;
+export const { filterItems, setSearchQuery } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

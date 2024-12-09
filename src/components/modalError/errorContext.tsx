@@ -4,7 +4,7 @@ import ErrorModal from './index';
 import { useDispatch } from 'react-redux';
 import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice/errorSlice';
 import { IErrorProviderProps } from './types';
-import { useAppSelector } from '@helpers/hooks';
+import { useAppSelector } from '@utils/hooks';
 
 export const ErrorProvider: React.FC<IErrorProviderProps> = ({ children }) => {
   const dispatch = useDispatch();

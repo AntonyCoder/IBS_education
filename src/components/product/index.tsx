@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@helpers/hooks";
+import { useAppDispatch, useAppSelector } from "@utils/hooks";
 import { clearProduct, fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { Status } from "@enums/status.enums";

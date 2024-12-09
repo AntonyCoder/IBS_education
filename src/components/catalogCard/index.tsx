@@ -1,7 +1,7 @@
 import React from "react";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
-import { useAppDispatch, useAppSelector } from "@helpers/hooks";
+import { useAppDispatch, useAppSelector } from "@utils/hooks";
 import { ICatalogItemProps } from "./types";
 import {
   ItemWrapper,
