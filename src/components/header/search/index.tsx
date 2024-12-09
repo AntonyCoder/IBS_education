@@ -1,18 +1,16 @@
 import { InputAdornment } from "@mui/material";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
 import setDebounce from "@utils/debounce";
-import { ICatalogState } from "@slices/catalogSlice/types";
-import { AppDispatch } from "src/store";
 import { StyledInput, StyledSearchIcon } from "./search.styled";
+import { useAppDispatch, useAppSelector } from "@helpers/hooks";
 
 const Search: React.FC = () => {
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const [searchQuery, setSearchQuery] = useState<string>('');
 
-    const { status } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
+    const status = useAppSelector((state) => state.catalog.status);
 
     useEffect(() => {
         if (status === 'idle') {

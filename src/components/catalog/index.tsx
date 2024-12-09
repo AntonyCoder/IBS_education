@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import CatalogItem from "@components/catalogCard/index";
-import { ICatalogState } from "@slices/catalogSlice/types";
 import { Status } from "@enums/status.enums";
 import { CatalogWrapper, CatalogItems } from "./catalog.styled";
+import { useAppSelector } from "@helpers/hooks";
 
 const Catalog: React.FC = () => {
-    const { filteredItems, status, error } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
+    const { filteredItems, status, error } = useAppSelector((state) => state.catalog);
 
     if (status === Status.Loading) {
         return <p>Загрузка...</p>;

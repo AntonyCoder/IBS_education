@@ -1,7 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "src/store";
 import { decrement, increment, setQuantity } from "@slices/quantitySlice/quantitySlice";
+import { useAppDispatch, useAppSelector } from "@helpers/hooks";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import {
@@ -11,8 +10,8 @@ import {
 } from "./quantity.styled";
 
 const Quantity: React.FC = () => {
-    const quantity = useSelector((state: RootState) => state.quantity.value);
-    const dispatch = useDispatch<AppDispatch>();
+    const quantity = useAppSelector((state) => state.quantity.value);
+    const dispatch = useAppDispatch();
 
     const handleIncrement = () => dispatch(increment());
     const handleDecrement = () => dispatch(decrement());

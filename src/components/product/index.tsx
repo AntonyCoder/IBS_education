@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@helpers/hooks";
 import { clearProduct, fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import { AppDispatch, RootState } from "src/store";
 import { Status } from "@enums/status.enums";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
 import Quantity from "@components/product/quantity";
-import { IProductState } from "@slices/productSlice/types";
 import {
     ItemPage,
     ImageWrapper,
@@ -26,11 +24,11 @@ import {
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
 
-    const { product, status, error } = useSelector((state: { product: IProductState }) => state.product);
-    const favoriteIds = useSelector((state: RootState) => state.favorite.favoriteIds);
+    const { product, status, error } = useAppSelector((state) => state.product);
+    const favoriteIds = useAppSelector((state) => state.favorite.favoriteIds);
 
     useEffect(() => {
         if (id) {

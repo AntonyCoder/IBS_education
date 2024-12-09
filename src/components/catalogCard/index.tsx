@@ -1,8 +1,7 @@
 import React from "react";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import { RootState } from "src/store";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@helpers/hooks";
 import { ICatalogItemProps } from "./types";
 import {
   ItemWrapper,
@@ -16,9 +15,9 @@ import {
 } from "./catalogCard.styled";
 
 const CatalogItem: React.FC<ICatalogItemProps> = ({ item }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const favoriteIds = useSelector((state: RootState) => state.favorite.favoriteIds)
+  const favoriteIds = useAppSelector((state) => state.favorite.favoriteIds)
 
   const isFavorite = favoriteIds.includes(item.id);
 

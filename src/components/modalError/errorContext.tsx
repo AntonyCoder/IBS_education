@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { setErrorCallback } from '@helpers/errorService';
 import ErrorModal from './index';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addError, clearCurrentError, removeError, setCurrentError } from '@slices/errorSlice/errorSlice';
-import { IErrorState} from '@slices/errorSlice/types';
 import { IErrorProviderProps } from './types';
+import { useAppSelector } from '@helpers/hooks';
 
 export const ErrorProvider: React.FC<IErrorProviderProps> = ({ children }) => {
   const dispatch = useDispatch();
 
-  const { errorQueue, currentError } = useSelector((state: { error: IErrorState }) => state.error);
+  const { errorQueue, currentError } = useAppSelector((state) => state.error);
 
   const showError = (message: string) => {
     const error = new Error(message);
