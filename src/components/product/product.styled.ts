@@ -3,8 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Button } from "@mui/material";
 import { Colors } from "@enums/colors.enums";
-
-const mobileBreakpoint = '870px';
+import { tabletBreakpoint } from "@constants/styles";
 
 export const ItemPage = styled('div')(
     () => ({
@@ -13,7 +12,7 @@ export const ItemPage = styled('div')(
         justifyContent: 'center',
         margin: '0 24px',
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             flexDirection: 'column',
             marginBottom: '2.4rem',
         }
@@ -24,7 +23,7 @@ export const ImageWrapper = styled('div')(
     () => ({
         marginRight: '1.6rem',
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             margin: '0 0 1.6rem',
             display: 'flex',
             justifyContent: 'center',
@@ -40,7 +39,7 @@ export const ItemImage = styled('img')(
         border: '1px solid',
         borderColor: Colors.cardBackgroundColor,
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             padding: 0,
             margin: '1.6rem 0',
             height: '16.8rem',
@@ -85,7 +84,7 @@ export const PurchaseWrapper = styled('div')(
         alignItems: 'center',
         justifyContent: 'start',
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             flexWrap: 'wrap',
         }
     })
@@ -97,7 +96,7 @@ export const ItemPrice = styled('span')(
         color: Colors.activeColor,
         marginRight: '16px',
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             width: 'calc(100% - 24px)',
             order: -1,
             margin: '0 0 1.6rem 0',
@@ -125,7 +124,7 @@ export const AddButton = styled(Button)(
             background: Colors.activeColorHover,
         },
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             order: 3,
             margin: '0 0 0 2.7rem',
         }
@@ -136,7 +135,7 @@ export const FavoriteIconWrapper = styled('div')(
     () => ({
         cursor: 'pointer',
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             order: 1,
             marginBottom: '1.6rem',
         }

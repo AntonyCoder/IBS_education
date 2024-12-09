@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { IconButton, TextField } from "@mui/material";
 import { Colors } from "@enums/colors.enums";
-
-const mobileBreakpoint = '870px';
+import { tabletBreakpoint } from "@constants/styles";
 
 export const QuantityWrapper = styled('div')(
     () => ({
@@ -14,7 +13,7 @@ export const QuantityWrapper = styled('div')(
             color: Colors.activeColor,
         },
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             order: 2,
         }
     })
@@ -65,7 +64,7 @@ export const StyledTextField = styled(TextField)(
             textAlign: 'center',
         },
 
-        [`@media (max-width: ${mobileBreakpoint})`]: {
+        [`@media (max-width: ${tabletBreakpoint})`]: {
             width: '6rem',
         }
     })

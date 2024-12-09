@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Colors } from "@enums/colors.enums";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
-const mobileBreakpoint = '560px';
+import { mobileBreakpoint } from "@constants/styles";
 
 export const ItemWrapper = styled('div')(
     () =>

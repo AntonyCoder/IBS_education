@@ -2,8 +2,7 @@ import styled from "styled-components";
 import SearchIcon from '@mui/icons-material/Search';
 import { Input } from "@mui/material";
 import { Colors } from "@enums/colors.enums";
-
-const mobileBreakpoint = '560px';
+import { mobileBreakpoint } from "@constants/styles";
 
 export const StyledInput = styled(Input)(
     () =>

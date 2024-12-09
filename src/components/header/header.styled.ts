@@ -2,8 +2,7 @@ import styled from "styled-components";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Colors } from "@enums/colors.enums";
-
-const mobileBreakpoint = '560px';
+import { mobileBreakpoint } from "@constants/styles";
 
 export const StyledHeader = styled('header')(
     () => ({
