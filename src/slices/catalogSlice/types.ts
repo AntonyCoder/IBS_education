@@ -12,4 +12,5 @@ export interface ICatalogState {
     loading: boolean;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error?: string;
+    searchQuery: string;
 }

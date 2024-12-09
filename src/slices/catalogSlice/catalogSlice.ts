@@ -5,6 +5,7 @@ import { ICatalogItem, ICatalogState } from "./types";
 const initialState: ICatalogState = {
     items: [],
     filteredItems: [],
+    searchQuery: "",
     loading: false,
     status: 'idle',
 }

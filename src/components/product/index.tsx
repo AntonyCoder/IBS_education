@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "@slices/productSlice/productSlice";
+import { clearProduct, fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { AppDispatch, RootState } from "src/store";
 import { Status } from "@enums/status.enums";
@@ -36,6 +36,10 @@ const Product: React.FC = () => {
         if (id) {
             dispatch(fetchProduct(id))
         }
+
+        return () => {
+            dispatch(clearProduct());
+        }
     }, [id, dispatch]);
 
     if (status === Status.Loading) return <p>Загрузка...</p>;
@@ -68,7 +72,7 @@ const Product: React.FC = () => {
                     <AddButton variant="contained">Add to cart</AddButton>
                     <FavoriteIconWrapper
                         onClick={handleToggleFavorite}>
-                        {isFavorite ? <StyledFavoriteIcon/> : <StyledFavoriteBorderIcon/>}
+                        {isFavorite ? <StyledFavoriteIcon /> : <StyledFavoriteBorderIcon />}
                     </FavoriteIconWrapper>
                 </PurchaseWrapper>
             </ItemInformation>
