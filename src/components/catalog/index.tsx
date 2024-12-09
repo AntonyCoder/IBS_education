@@ -1,12 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
 import CatalogItem from "@components/catalogCard/index";
-import { ICatalogState } from "@slices/catalogSlice/types";
 import { Status } from "@enums/status.enums";
-import './catalog.styles.scss';
+import { CatalogWrapper, CatalogItems } from "./catalog.styled";
+import { useAppDispatch, useAppSelector } from "@utils/hooks";
+import setDebounce from "@utils/debounce";
 
 const Catalog: React.FC = () => {
-    const { filteredItems, status, error } = useSelector((state: { catalog: ICatalogState }) => state.catalog);
+    const dispatch = useAppDispatch();
+    const { filteredItems, status, error, searchQuery } = useAppSelector((state) => state.catalog);
+
+    useEffect(() => {
+        if (status === "idle") {
+            dispatch(fetchCatalog());
+        }
+    }, [status, dispatch]);
+
+    useEffect(() => {
+        const debounceFilter = setDebounce((query: string) => {
+            dispatch(filterItems(query));
+        }, 1000);
+
+        debounceFilter(searchQuery);
+    }, [searchQuery, dispatch]);
 
     if (status === Status.Loading) {
         return <p>Загрузка...</p>;
@@ -25,13 +41,13 @@ const Catalog: React.FC = () => {
     }
 
     return (
-        <section className="catalog">
-            <div className="catalog-items">
+        <CatalogWrapper>
+            <CatalogItems>
                 {filteredItems.map((item) => (
                     <CatalogItem key={item.id} item={item} />
                 ))}
-            </div>
-        </section>
+            </CatalogItems>
+        </CatalogWrapper>
     );
 };
 
