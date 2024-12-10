@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import { fetchCatalog, filterItems } from "@slices/catalogSlice/catalogSlice";
+import React, { useEffect, useMemo } from "react";
+import { fetchCatalog } from "@slices/catalogSlice/catalogSlice";
 import CatalogItem from "@components/catalogCard/index";
 import { Status } from "@enums/status.enums";
 import { CatalogWrapper, CatalogItems } from "./catalog.styled";
 import { useAppDispatch, useAppSelector } from "@utils/hooks";
-import setDebounce from "@utils/debounce";
 
 const Catalog: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { filteredItems, status, error, searchQuery } = useAppSelector((state) => state.catalog);
+    const { items, status, error, searchQuery } = useAppSelector((state) => state.catalog);
 
     useEffect(() => {
         if (status === "idle") {
@@ -16,13 +15,10 @@ const Catalog: React.FC = () => {
         }
     }, [status, dispatch]);
 
-    useEffect(() => {
-        const debounceFilter = setDebounce((query: string) => {
-            dispatch(filterItems(query));
-        }, 1000);
-
-        debounceFilter(searchQuery);
-    }, [searchQuery, dispatch]);
+    const filteredItems = useMemo(() => {
+        const query = searchQuery.toLowerCase();
+        return items.filter((item) => item.name.toLowerCase().includes(query));
+    }, [items, searchQuery]);
 
     if (status === Status.Loading) {
         return <p>Загрузка...</p>;

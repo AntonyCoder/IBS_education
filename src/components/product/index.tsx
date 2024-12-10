@@ -6,6 +6,7 @@ import { LOCAL_SERVER_URL } from "@api/apiConfig";
 import { Status } from "@enums/status.enums";
 import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
 import Quantity from "@components/product/quantity";
+import { resetQuantity } from "@slices/quantitySlice/quantitySlice";
 import {
     ItemPage,
     ImageWrapper,
@@ -37,6 +38,7 @@ const Product: React.FC = () => {
 
         return () => {
             dispatch(clearProduct());
+            dispatch(resetQuantity());
         }
     }, [id, dispatch]);
 

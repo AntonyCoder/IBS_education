@@ -8,7 +8,6 @@ export interface ICatalogItem {
 
 export interface ICatalogState {
     items: ICatalogItem[];
-    filteredItems: ICatalogItem[];
     loading: boolean;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error?: string;

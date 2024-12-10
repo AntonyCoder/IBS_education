@@ -1,25 +1,32 @@
 import { InputAdornment } from "@mui/material";
-import React, { ChangeEvent } from "react";
-
+import React, { ChangeEvent, useState, useCallback } from "react";
 import { StyledInput, StyledSearchIcon } from "./search.styled";
-import { useAppDispatch, useAppSelector } from "@utils/hooks";
+import { useAppDispatch } from "@utils/hooks";
 import { setSearchQuery } from "@slices/catalogSlice/catalogSlice";
+import setDebounce from "@utils/debounce";
 
 const Search: React.FC = () => {
-
     const dispatch = useAppDispatch();
-    const searchQuery = useAppSelector((state) => state.catalog.searchQuery);
+    const [inputValue, setInputValue] = useState<string>("");
+
+    const debouncedDispatch = useCallback(
+        setDebounce((query: string) => {
+            dispatch(setSearchQuery(query));
+        }, 1000),
+        [dispatch]
+    );
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
-        dispatch(setSearchQuery(query));
+        setInputValue(query)
+        debouncedDispatch(query);
     };
 
     return (
         <StyledInput
             type="search"
             placeholder="Search products"
-            value={searchQuery}
+            value={inputValue}
             onChange={handleInputChange}
             startAdornment={
                 <InputAdornment position="start">

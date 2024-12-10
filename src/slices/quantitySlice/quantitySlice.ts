@@ -22,9 +22,10 @@ const quantitySlice = createSlice({
             if (action.payload > 0) {
                 state.value = action.payload;
             }
-        }
+        },
+        resetQuantity: () => initialState,
     }
 })
 
-export const {increment, decrement, setQuantity} = quantitySlice.actions;
+export const { increment, decrement, setQuantity, resetQuantity } = quantitySlice.actions;
 export default quantitySlice.reducer;
