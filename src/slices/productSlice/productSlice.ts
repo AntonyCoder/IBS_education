@@ -12,8 +12,8 @@ export const fetchProduct = createAsyncThunk<IProduct, string>(
     'product/fetchProduct',
     async (id: string) => {
         const response = await fetchProductData(id);
-        if(!response) {
-            throw new Error ('Не удалось загрузить данные');
+        if (!response) {
+            throw new Error('Не удалось загрузить данные');
         }
         return response;
     }
@@ -22,7 +22,13 @@ export const fetchProduct = createAsyncThunk<IProduct, string>(
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers: {},
+    reducers: {
+        clearProduct: (state) => {
+            state.product = null;
+            state.status = "idle";
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProduct.pending, (state) => {
@@ -38,5 +44,7 @@ const productSlice = createSlice({
             });
     },
 });
+
+export const { clearProduct } = productSlice.actions;
 
 export default productSlice.reducer;

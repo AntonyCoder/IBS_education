@@ -4,7 +4,7 @@ import { ICatalogItem, ICatalogState } from "./types";
 
 const initialState: ICatalogState = {
     items: [],
-    filteredItems: [],
+    searchQuery: "",
     loading: false,
     status: 'idle',
 }
@@ -25,11 +25,8 @@ const catalogSlice = createSlice({
     name: 'catalog',
     initialState,
     reducers: {
-        filterItems(state, action: PayloadAction<string>) {
-            const query = action.payload.toLowerCase();
-            state.filteredItems = state.items.filter((item) =>
-                item.name.toLowerCase().includes(query)
-            );
+        setSearchQuery(state, action: PayloadAction<string>) {
+            state.searchQuery = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -42,7 +39,6 @@ const catalogSlice = createSlice({
             .addCase(fetchCatalog.fulfilled, (state, action: PayloadAction<ICatalogItem[]>) => {
                 state.status = 'succeeded';
                 state.items = action.payload;
-                state.filteredItems = action.payload;
                 state.loading = false;
             })
             .addCase(fetchCatalog.rejected, (state, action) => {
@@ -53,6 +49,6 @@ const catalogSlice = createSlice({
     },
 });
 
-export const { filterItems } = catalogSlice.actions;
+export const { setSearchQuery } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

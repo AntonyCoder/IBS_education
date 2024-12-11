@@ -1,70 +1,82 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "@slices/productSlice/productSlice";
-import favoriteActiveIcon from '@svg/favorite_active.svg';
-import favoriteDisabledIcon from '@svg/favorite.svg';
+import { useAppDispatch, useAppSelector } from "@utils/hooks";
+import { clearProduct, fetchProduct } from "@slices/productSlice/productSlice";
 import { LOCAL_SERVER_URL } from "@api/apiConfig";
-import removeBtn from '@svg/remove_btn.svg';
-import addBtn from '@svg/add_btn.svg';
-import { AppDispatch } from "src/store";
-import { IProductState } from "@slices/productSlice/types";
-import './product.styles.scss';
+import { Status } from "@enums/status.enums";
+import { toggleFavorite } from "@slices/favoriteSlice/favoriteSlice";
+import Quantity from "@components/product/quantity";
+import { resetQuantity } from "@slices/quantitySlice/quantitySlice";
+import {
+    ItemPage,
+    ImageWrapper,
+    ItemImage,
+    ItemInformation,
+    ItemTitle,
+    ItemDescription,
+    ItemDetails,
+    PurchaseWrapper,
+    ItemPrice,
+    AddButton,
+    FavoriteIconWrapper,
+    StyledFavoriteIcon,
+    StyledFavoriteBorderIcon
+} from "./product.styled";
 
 const Product: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
-    const { product, status, error } = useSelector((state: { product: IProductState }) => state.product)
+
+    const { product, status, error } = useAppSelector((state) => state.product);
+    const favoriteIds = useAppSelector((state) => state.favorite.favoriteIds);
 
     useEffect(() => {
-        if(id) {
+        if (id) {
             dispatch(fetchProduct(id))
+        }
+
+        return () => {
+            dispatch(clearProduct());
+            dispatch(resetQuantity());
         }
     }, [id, dispatch]);
 
-     if (status === 'loading') return <p>Загрузка...</p>;
+    if (status === Status.Loading) return <p>Загрузка...</p>;
+    if (status === Status.Failed) return <p>Ошибка при загрузке данных: {error}</p>;
+    if (!product) return <p>Товар не найден.</p>;
 
-     if (status === 'failed') return <p>Ошибка при загрузке данных: {error}</p>;
- 
-     if (!product) return <p>Товар не найден.</p>;
+    const isFavorite = favoriteIds.includes(product.id);
+
+    const handleToggleFavorite = () => {
+        dispatch(toggleFavorite(product.id));
+    }
 
     return (
-        <div className="item-page">
-            <div className="image-wrapper">
-                <img
-                    className="item__image-main"
+        <ItemPage>
+            <ImageWrapper>
+                <ItemImage
                     src={`${LOCAL_SERVER_URL}${product.picture.path}`}
-                    alt={product.picture.alt}
-                />
-            </div>
-            <div className="item-information">
-                <h1 className="item__title-main">{product.name}</h1>
-                <p className="item-description">{product.info}</p>
-                <span className="item-details">Details</span>
-                <p className="item-description">{product.details}</p>
-                <div className="purchase-wrapper">
-                    <span className="item__price-main">
+                    alt={product.picture.alt} />
+            </ImageWrapper>
+            <ItemInformation>
+                <ItemTitle>{product.name}</ItemTitle>
+                <ItemDescription>{product.info}</ItemDescription>
+                <ItemDetails>Details</ItemDetails>
+                <ItemDescription>{product.details}</ItemDescription>
+                <PurchaseWrapper>
+                    <ItemPrice>
                         {product.price.value} {product.price.currency}
-                    </span>
-                    <div className="quantity-wrapper">
-                        <button className="control">
-                            <img src={removeBtn} alt="remove-btn" />
-                        </button>
-                        <input className="quantity" type="text" defaultValue={1} />
-                        <button className="control">
-                            <img src={addBtn} alt="add-btn" />
-                        </button>
-                    </div>
-                    <button className="add-btn">Add to cart</button>
-                    <img
-                        className="favorite__icon-main"
-                        src={product.like ? favoriteActiveIcon : favoriteDisabledIcon}
-                        alt="favorite"
-                    />
-                </div>
-            </div>
-        </div>
+                    </ItemPrice>
+                    <Quantity />
+                    <AddButton variant="contained">Add to cart</AddButton>
+                    <FavoriteIconWrapper
+                        onClick={handleToggleFavorite}>
+                        {isFavorite ? <StyledFavoriteIcon /> : <StyledFavoriteBorderIcon />}
+                    </FavoriteIconWrapper>
+                </PurchaseWrapper>
+            </ItemInformation>
+        </ItemPage>
     );
 };
 

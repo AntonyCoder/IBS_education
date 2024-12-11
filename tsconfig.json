@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@svg/*": ["src/assets/svg/*"],
       "@api/*": ["src/api/*"],
       "@styles/*": ["src/styles/*"],
       "@slices/*": ["src/slices/*"],
@@ -13,6 +12,7 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
+      "@constants/*": ["src/constants/*"],
     },
     "target": "ES6",
     "module": "ESNext",

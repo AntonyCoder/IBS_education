@@ -43,7 +43,6 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.svg', '.jsx', '.scss', '.tsx', '.ts',],
         alias: {
-            '@svg': path.resolve(__dirname, 'src/assets/svg'),
             '@api': path.resolve(__dirname, 'src/api'),
             '@styles': path.resolve(__dirname, 'src/styles'),
             '@slices': path.resolve(__dirname, 'src/slices'),
@@ -54,6 +53,7 @@ module.exports = {
             '@components': path.resolve(__dirname, 'src/components'),
             '@layouts': path.resolve(__dirname, 'src/layouts'),
             '@pages': path.resolve(__dirname, 'src/pages'),
+            '@constants': path.resolve(__dirname, 'src/constants'),
         }
     },
     module: {
